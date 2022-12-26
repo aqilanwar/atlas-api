@@ -15,7 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('front-pages/home');
+});
+Route::get('/log', function () {
+    return view('front-pages/login');
+});
+Route::get('/reg', function () {
+    return view('front-pages/register');
+});
+Route::get('/prof', function () {
+    return view('back-layouts/master');
 });
 
 Route::get('/dashboard', function () {
