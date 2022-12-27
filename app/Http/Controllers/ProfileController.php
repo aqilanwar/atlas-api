@@ -64,4 +64,8 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function email_confirmation(){
+        return view('front-pages/email_confirmation');
+    }
 }

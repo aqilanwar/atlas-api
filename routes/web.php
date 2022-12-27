@@ -20,12 +20,16 @@ Route::get('/', function () {
 Route::get('/log', function () {
     return view('front-pages/login');
 });
-Route::get('/reg', function () {
+Route::get('/register', function () {
     return view('front-pages/register');
 });
 Route::get('/prof', function () {
     return view('back-layouts/master');
 });
+Route::get('/logout', function () {
+    Auth::logout();
+});
+Route::get('/email_confirmation', [ProfileController::class, 'email_confirmation']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
