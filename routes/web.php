@@ -23,9 +23,13 @@ Route::get('/log', function () {
 Route::get('/register', function () {
     return view('front-pages/register');
 });
-Route::get('/home', function () {
-    return view('back-layouts/master');
-});
+Route::get('/profile', function () {
+    return view('back-pages/profile');
+})->name('profile');
+
+Route::get('/courses', function () {
+    return view('back-pages/courses');
+})->name('courses');
 Route::get('/logout', function () {
     Auth::logout();
     return redirect('/login');
@@ -37,10 +41,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 require __DIR__.'/auth.php';
