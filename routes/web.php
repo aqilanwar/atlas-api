@@ -23,11 +23,13 @@ Route::get('/log', function () {
 Route::get('/register', function () {
     return view('front-pages/register');
 });
-Route::get('/prof', function () {
+Route::get('/home', function () {
     return view('back-layouts/master');
 });
 Route::get('/logout', function () {
     Auth::logout();
+    return redirect('/login');
+
 });
 Route::get('/email_confirmation', [ProfileController::class, 'email_confirmation']);
 
