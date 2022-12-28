@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-12-28T14:02:36.143Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="uUfx_MEeTK6BKJtXEdL0" version="20.7.4" type="github">
+<mxfile host="app.diagrams.net" modified="2022-12-28T14:09:52.920Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="8p3vIUebjL25UV1s70sy" version="20.7.4" type="github" pages="2">
   <diagram id="Xj64VRfgsmiTF-0bhzSZ" name="Page-1">
     <mxGraphModel dx="1434" dy="764" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -202,6 +202,77 @@
             <mxPoint x="210" y="125" as="sourcePoint" />
             <mxPoint x="180" y="735" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="1YD6bruwPhMYWwaoV1wp" name="Page-2">
+    <mxGraphModel dx="2390" dy="1273" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qp2Mem6DO1-0D09ecmUJ-1" target="qp2Mem6DO1-0D09ecmUJ-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-1" value="SIGN UP PAGE&amp;nbsp;&lt;br&gt;&lt;br&gt;Name&lt;br&gt;Email&lt;br&gt;password&lt;br&gt;confirm password" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="80" width="420" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qp2Mem6DO1-0D09ecmUJ-2" target="qp2Mem6DO1-0D09ecmUJ-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-2" value="EMAIL CONFIRMATION PAGE&amp;nbsp;&lt;br&gt;&lt;br&gt;THANKS FOR REGISTER WITH ATLAS" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="345" width="420" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qp2Mem6DO1-0D09ecmUJ-4" target="qp2Mem6DO1-0D09ecmUJ-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-4" value="LOGIN PAGE&lt;br&gt;&lt;br&gt;email&lt;br&gt;password" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="620" width="420" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qp2Mem6DO1-0D09ecmUJ-6" target="qp2Mem6DO1-0D09ecmUJ-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qp2Mem6DO1-0D09ecmUJ-6" target="qp2Mem6DO1-0D09ecmUJ-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-6" value="check if profile updated?&amp;nbsp;&lt;br&gt;&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="880" width="420" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qp2Mem6DO1-0D09ecmUJ-8" target="qp2Mem6DO1-0D09ecmUJ-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-8" value="check if courses registered?&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="880" width="420" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-10" value="YES" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="690" y="830" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qp2Mem6DO1-0D09ecmUJ-11" target="qp2Mem6DO1-0D09ecmUJ-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-11" value="SELECT COURSE PAGE" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="560" width="420" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-13" value="YES" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="980" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qp2Mem6DO1-0D09ecmUJ-14" target="qp2Mem6DO1-0D09ecmUJ-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-14" value="UPDATE PROFILE PAGE&lt;br&gt;&lt;br&gt;Parents details&lt;br&gt;Dob&amp;nbsp;&lt;br&gt;bla bla&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="1200" width="420" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-16" value="NO" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="260" y="1150" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qp2Mem6DO1-0D09ecmUJ-17" target="qp2Mem6DO1-0D09ecmUJ-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-17" value="saved ?&amp;nbsp;&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="1520" width="420" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="qp2Mem6DO1-0D09ecmUJ-19" value="PROFILE PAGE" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="1190" width="420" height="240" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
