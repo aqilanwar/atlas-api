@@ -30,6 +30,14 @@ Route::get('/profile', function () {
 Route::get('/courses', function () {
     return view('back-pages/courses');
 })->name('courses');
+
+Route::get('/detail', function () {
+    return view('back-pages/detail');
+})->name('detail');
+Route::get('/register-courses', function () {
+    return view('back-pages/register-courses');
+})->name('register-courses');
+
 Route::get('/logout', function () {
     Auth::logout();
     return redirect('/login');

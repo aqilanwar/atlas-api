@@ -3,7 +3,7 @@
 
 @section('content')
    	
-<div class="flex-lg-row-fluid ms-lg-10">
+<div class="flex-lg-row-fluid ms-lg-10 ">
     <!--begin::Table Widget 1-->
 									<div class="card mb-5 mb-xl-10">
 										<!--begin::Header-->

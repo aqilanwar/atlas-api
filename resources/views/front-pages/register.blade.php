@@ -1,6 +1,6 @@
 @extends('front-layouts/master')
 
-@section('title' , 'Login')
+@section('title' , 'Register')
 @section('content')
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
@@ -8,19 +8,14 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 pt-2 pt-lg-0 order-1 order-lg-1 d-flex flex-column justify-content-center">
-          <h1>Selamat datang ke <br>
+          <h1 class="mb-3">Thank you for choosing <br>
             <span class="fw-bold">Atlas Tuition Center!</span> 
           </h1>
           <h4>
-            Adakah anda mencari cara yang boleh dipercayai dan berkesan untuk meningkatkan prestasi akademik anda? 
-            Jangan risau lagi! 
+            We are so excited to have you join our community of learners. At Atlas, we believe that every student has the potential to succeed, and it is our mission to help you reach your full potential. Our team of experienced educators is dedicated to providing high-quality, personalized instruction to help you succeed in your academic journey.
             <br> <br>
-            Di Atlas Tuition Center, kami menyediakan perkhidmatan tuisyen yang disesuaikan dan komprehensif untuk pelajar semua peringkat dan umur.
+            We can't wait to see what you will achieve with us at Atlas Tuition Center. Thank you for choosing us as your learning partner. Let's get started on your journey to academic success today!
           </h4>
-          <div class="mt-3">
-            <a href="#about" class="btn-get-started scrollto">Daftar Sekarang</a>
-            <a href="" class="btn-get-quote">Lihat subjek yang ditawarkan</a>
-          </div>
         </div>
         <div class="col-lg-6 order-2 order-lg-2">
             <div class="card shadow p-3 mb-5 bg-white rounded border-0">  

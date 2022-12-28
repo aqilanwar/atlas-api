@@ -19,8 +19,8 @@
             Di Atlas Tuition Center, kami menyediakan perkhidmatan tuisyen yang disesuaikan dan komprehensif untuk pelajar semua peringkat dan umur.
           </h4>
           <div class="mt-3">
-            <a href="#about" class="btn-get-started scrollto">Daftar Sekarang</a>
-            <a href="" class="btn-get-quote">Lihat subjek yang ditawarkan</a>
+            <a href="{{route('register')}}" class="btn-get-started">Daftar Sekarang</a>
+            <a href="#services" class="btn-get-quote scrollto">Lihat subjek yang ditawarkan</a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img">
