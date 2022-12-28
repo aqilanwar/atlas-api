@@ -13,7 +13,7 @@ License: For each use you must have a valid license purchased only from above li
 <html lang="en">
 	<!--begin::Head-->
 	<head><base href="../">
-		<title>Ceres HTML Free - Bootstrap 5 HTML Multipurpose Admin Dashboard Theme by Keenthemes</title>
+		<title>Atlas Edu - @yield('title')</title>
 		<meta name="description" content="Ceres admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
 		<meta name="keywords" content="Ceres theme, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,7 +24,8 @@ License: For each use you must have a valid license purchased only from above li
 		<meta property="og:url" content="https://keenthemes.com/products/ceres-html-pro" />
 		<meta property="og:site_name" content="Keenthemes | Ceres HTML Free" />
 		<link rel="canonical" href="Https://preview.keenthemes.com/ceres-html-free" />
-		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+        <link href="{{asset('assets/img/favicon.png')}}" rel="icon">
+        <link href="{{asset('assets/img/apple-touch-icon.png')}}"  rel="apple-touch-icon">
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->

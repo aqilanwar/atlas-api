@@ -68,4 +68,43 @@ class ProfileController extends Controller
     public function email_confirmation(){
         return view('front-pages/email_confirmation');
     }
+
+    public function ShowProfile(){
+
+        if(Auth::user()->updated_profile == 0){
+            return redirect()->route('update-detail');
+        }
+        
+        if(Auth::user()->registered_course == 0 ){
+            return redirect()->route('register-courses');
+        }
+
+        return view('back-pages/profile');
+
+    }
+
+    public function ShowUpdateDetail(){
+        $student = Auth::user();
+        return view('back-pages/update-detail', compact('student'));
+    }
+
+    public function SaveUpdateDetail(Request $request){
+        // $student = Auth::user();
+        $validatedData = $request->validate([
+            'name' => ['required'],
+            'email' => ['required'],
+            'dob' => ['required'],
+            'phone_number' => ['required'],
+            'address' => ['required'],
+            'parents_name' => ['required'],
+            'parents_phone_number' => ['required'],
+            'parents_address' => ['required'],
+            
+        ],
+        [
+            'dob.required' => 'Date of birth is required',
+        ]);
+
+        dd($validatedData);
+    }
 }

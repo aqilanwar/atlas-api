@@ -23,17 +23,18 @@ Route::get('/log', function () {
 Route::get('/register', function () {
     return view('front-pages/register');
 });
-Route::get('/profile', function () {
-    return view('back-pages/profile');
-})->name('profile');
+// Route::get('/profile', function () {
+//     return view('back-pages/profile');
+// })->name('profile');
 
 Route::get('/courses', function () {
     return view('back-pages/courses');
 })->name('courses');
 
-Route::get('/detail', function () {
-    return view('back-pages/detail');
-})->name('detail');
+
+Route::get('/update-detail', [ProfileController::class, 'ShowUpdateDetail'])->name('update-detail');
+
+
 Route::get('/register-courses', function () {
     return view('back-pages/register-courses');
 })->name('register-courses');
@@ -41,13 +42,15 @@ Route::get('/register-courses', function () {
 Route::get('/logout', function () {
     Auth::logout();
     return redirect('/login');
-
 });
-Route::get('/email_confirmation', [ProfileController::class, 'email_confirmation']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::post('/update-detail/save', [ProfileController::class, 'SaveUpdateDetail'])->name('update-detail.save');
+Route::get('/email_confirmation', [ProfileController::class, 'email_confirmation']);
+Route::get('/profile', [ProfileController::class, 'ShowProfile'])->name('profile');
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

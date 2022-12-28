@@ -1,6 +1,6 @@
 @extends('back-layouts/unverified')
 @section('page', 'Courses')
-
+@section('title' , 'Choose Courses')
 @section('content')
     <div class="container">
         <div class="row">
@@ -45,7 +45,7 @@
                                     <td>
                                         <div class="row">
                                             <!--begin::Label-->
-                                            <label class="col fw-bold"> RM 50.00/m</label>
+                                            <label class="col fw-bold"> RM 50.00</label>
                                             <!--end::Label-->
                                         </div>
                                         <!--end::Row-->
@@ -77,7 +77,7 @@
                                     <td>
                                         <div class="row">
                                             <!--begin::Label-->
-                                            <label class="col fw-bold"> RM 25.00</label>
+                                            <label class="col fw-bold"> RM 100.00</label>
                                             <!--end::Label-->
                                         </div>
                                         <!--end::Row-->
@@ -101,7 +101,7 @@
                                     <td>
                                         <div class="row">
                                             <!--begin::Label-->
-                                            <label class="col fw-bold mx-3">English</label>
+                                            <label class="col fw-bold mx-3">Kimia</label>
                                             <!--end::Label-->
                                         </div>
                                         <!--end::Row-->
@@ -109,37 +109,7 @@
                                     <td>
                                         <div class="row">
                                             <!--begin::Label-->
-                                            <label class="col fw-bold"> RM 30.00</label>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Row-->
-                                    </td>
-                                    <td>
-                                        <!--begin::Col-->
-                                        <div class="col">
-                                            <!--begin:Input-->
-                                            <span class="form-check form-check-custom form-check-solid">
-                                                <input class="form-check-input" type="checkbox" name="category"
-                                                    value="2" />
-                                            </span>
-                                            <!--end:Input-->
-                                        </div>
-                                        <!--end::Col-->
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="row">
-                                            <!--begin::Label-->
-                                            <label class="col fw-bold mx-3">Matematik</label>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Row-->
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            <!--begin::Label-->
-                                            <label class="col fw-bold"> RM 80.00</label>
+                                            <label class="col fw-bold"> RM 100.00</label>
                                             <!--end::Label-->
                                         </div>
                                         <!--end::Row-->
@@ -161,7 +131,7 @@
                                     <td>
                                         <div class="row">
                                             <!--begin::Label-->
-                                            <label class="col fw-bold mx-3">Music</label>
+                                            <label class="col fw-bold mx-3">Kimia</label>
                                             <!--end::Label-->
                                         </div>
                                         <!--end::Row-->
@@ -169,7 +139,37 @@
                                     <td>
                                         <div class="row">
                                             <!--begin::Label-->
-                                            <label class="col fw-bold"> RM 50.00/m</label>
+                                            <label class="col fw-bold"> RM 100.00</label>
+                                            <!--end::Label-->
+                                        </div>
+                                        <!--end::Row-->
+                                    </td>
+                                    <td>
+                                        <!--begin::Col-->
+                                        <div class="col">
+                                            <!--begin:Input-->
+                                            <span class="form-check form-check-custom form-check-solid">
+                                                <input class="form-check-input" type="checkbox" name="category"
+                                                    value="2" />
+                                            </span>
+                                            <!--end:Input-->
+                                        </div>
+                                        <!--end::Col-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <!--begin::Label-->
+                                            <label class="col fw-bold mx-3">Kimia</label>
+                                            <!--end::Label-->
+                                        </div>
+                                        <!--end::Row-->
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <!--begin::Label-->
+                                            <label class="col fw-bold"> RM 100.00</label>
                                             <!--end::Label-->
                                         </div>
                                         <!--end::Row-->
@@ -194,12 +194,11 @@
                             </tbody>
                         </table>
                         
-                        <div class="card-footer mt-3 mb-4">
+                        <div class="card-footer mt-3 mb-3">
                             <div class="float-end">
                                 <h3>Total : RM 200.00</h3>
                             </div>
                         </div>
-                        
 
                         <button type="button" class="btn btn-lg btn-primary float-end"
                             data-kt-stepper-action="next">Continue
