@@ -77,6 +77,8 @@ License: For each use you must have a valid license purchased only from above li
 		<!--begin::Page Custom Javascript(used by this page)-->
 		<script src="{{asset('back-assets/js/custom/widgets.js')}}"></script>
 		<!--end::Page Custom Javascript-->
+		<script src="{{asset('back-assets/js/app/subject.js')}}"></script>
+
 		<!--end::Javascript-->
 	</body>
 	<!--end::Body-->
