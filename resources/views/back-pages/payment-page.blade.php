@@ -1,6 +1,6 @@
 @extends('back-layouts/unverified')
 @section('page', 'Courses')
-@section('title' , 'Payment')
+@section('title', 'Payment')
 @section('content')
     <div class="container">
         <div class="row">
@@ -21,20 +21,85 @@
                     <!--begin::Card body-->
                     <div class="card-body p-9">
                         <div class="row mb-8">
-                            <h4 class="fw-bolder text-center">Select your payment method :  </h4>
+                            <h4 class="fw-bolder text-center">Select your payment method : </h4>
                         </div>
-                        @if(session()->has('error'))
+                        @if (session()->has('error'))
                             <div class="alert alert-danger">
                                 {{ session()->get('error') }}
                             </div>
                         @endif
-
-  
-
-
-
-                        <button type="button" class="btn btn-lg btn-primary float-end"
-                            data-kt-stepper-action="next" onClick="getSelectedCourses()">Continue
+                        <!--begin::Row-->
+                        <div class="col">
+                            <div class="row mb-7">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 fw-bold"> Card Holder
+                                    <span class="required"></span>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Input-->
+                                    <input type="text" class="form-control form-control-lg form-control-solid"
+                                        name="name" placeholder="" value="" />
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <div class="col">
+                                <div class="row mb-7">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 fw-bold"> Card Number
+                                        <span class="required"></span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8">
+                                        <!--begin::Input-->
+                                        <input type="text" class="form-control form-control-lg form-control-solid"
+                                            name="card_number" placeholder="" value=""  data-inputmask-mask="9999 9999 9999 9999"/>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row mb-7">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 fw-bold"> CVV
+                                        <span class="required"></span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8">
+                                        <!--begin::Input-->
+                                        <input type="text" class="form-control form-control-lg form-control-solid"
+                                            name="cvv" placeholder="" value="" data-inputmask-mask="999" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row mb-7">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 fw-bold"> Card Expire (MM/YYYY)
+                                        <span class="required"></span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8">
+                                        <!--begin::Input-->
+                                        <input type="text" class="form-control form-control-lg form-control-solid"
+                                            name="cex" placeholder="" value="" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/yyyy" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Row-->
+                        <button type="button" class="btn btn-lg btn-primary float-end" data-kt-stepper-action="next"
+                            onClick="getSelectedCourses()">Pay now
                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                             <span class="svg-icon svg-icon-3 ms-1 me-0">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -61,7 +126,7 @@
                     <div class="card-header">
                         <!--begin::Card title-->
                         <div class="card-title m-0">
-                            <h3 class="fw-bolder m-0">Selected courses :  </h3>
+                            <h3 class="fw-bolder m-0">Selected courses : </h3>
                         </div>
                         <!--end::Card title-->
                     </div>
@@ -70,7 +135,7 @@
                     <!--begin::Card header-->
                     <!--begin::Card body-->
                     <div class="card-body p-9">
-                        @if(session()->has('error'))
+                        @if (session()->has('error'))
                             <div class="alert alert-danger">
                                 {{ session()->get('error') }}
                             </div>
@@ -83,31 +148,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($subjects as $subject)                                    
-                                <tr>
-                                    <td>
-                                        <div class="row">
-                                            <!--begin::Label-->
-                                            <label class="col fw-bold mx-3">{{ $subject->name }}</label>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Row-->
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            <!--begin::Label-->
-                                            <label class="col fw-bold" id="subject-{{ $subject->id }}" value="{{ $subject->price }}"> RM {{ $subject->price }}</label>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Row-->
-                                    </td>
-                                </tr>                                
+                                @foreach ($subjects as $subject)
+                                    <tr>
+                                        <td>
+                                            <div class="row">
+                                                <!--begin::Label-->
+                                                <label class="col fw-bold mx-3">{{ $subject->name }}</label>
+                                                <!--end::Label-->
+                                            </div>
+                                            <!--end::Row-->
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <!--begin::Label-->
+                                                <label class="col fw-bold" id="subject-{{ $subject->id }}"
+                                                    value="{{ $subject->price }}"> RM {{ $subject->price }}</label>
+                                                <!--end::Label-->
+                                            </div>
+                                            <!--end::Row-->
+                                        </td>
+                                    </tr>
                                 @endforeach
                                 <tr>
                                     <td>
                                         <div class="row">
                                             <!--begin::Label-->
-                                            <label class="col fw-bold mx-3 text-danger" >Total : </label>
+                                            <label class="col fw-bold mx-3 text-danger">Total : </label>
                                             <!--end::Label-->
                                         </div>
                                         <!--end::Row-->
@@ -115,13 +181,13 @@
                                     <td>
                                         <div class="row">
                                             <!--begin::Label-->
-                                            <label class="col fw-bold text-danger" >RM {{ $total }}.00</label>
+                                            <label class="col fw-bold text-danger">RM {{ $total }}.00</label>
                                             <!--end::Label-->
                                         </div>
                                         <!--end::Row-->
                                     </td>
                                 </tr>
-                            </tr>  
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -134,4 +200,3 @@
     </div>
 
 @endsection
-
