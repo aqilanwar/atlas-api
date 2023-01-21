@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -89,7 +90,7 @@ class ProfileController extends Controller
     }
 
     public function SaveUpdateDetail(Request $request){
-        // $student = Auth::user();
+        $user_id = Auth::user()->id ;
         $validatedData = $request->validate([
             'name' => ['required'],
             'email' => ['required'],
@@ -105,6 +106,21 @@ class ProfileController extends Controller
             'dob.required' => 'Date of birth is required',
         ]);
 
-        dd($validatedData);
+        $user = User::find($user_id);
+
+        $user->name = $request->name;
+        $user->email= $request-> email;
+        $user->dob= $request-> dob;
+        $user->phone_number = trim($request->phone_number , '_');
+        $user->address = $request->address;
+        $user->parents_name = $request->parents_name;
+        $user->parents_phone_number = trim($request->parents_phone_number, '_');
+        $user->parents_address = $request->parents_address;
+        $user->updated_profile = 1; 
+        $user->updated_at = now(); 
+        $user->save();
+
+        return redirect()->route('register-courses');
+
     }
 }

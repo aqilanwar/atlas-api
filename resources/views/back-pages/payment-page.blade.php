@@ -29,26 +29,19 @@
                             </div>
                         @endif
                         <!--begin::Row-->
-                        <div class="col">
-                            <div class="row mb-7">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 fw-bold"> Card Holder
-                                    <span class="required"></span>
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8">
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-lg form-control-solid"
-                                        name="name" placeholder="" value="" />
-                                    <!--end::Input-->
-                                </div>
-                                <!--end::Col-->
-                            </div>
+
+                        <form action="{{ route('submit-payment') }}" method="POST" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="checkout-form">
+                            @csrf                            
                             <div class="col">
                                 <div class="row mb-7">
+                                    <input type='hidden' name='stripeToken' id='stripe-token-id'>                              
+
+                                    {{-- <input type="hidden" name="stripeToken" value="{{ env('STRIPE_KEY') }}"> --}}
+                                    @foreach ($subjects as $subject)
+                                        <input name="selected_subject[]" type="hidden" value="{{ $subject->id }}" />                                                     
+                                    @endforeach
                                     <!--begin::Label-->
-                                    <label class="col-lg-4 fw-bold"> Card Number
+                                    {{-- <label class="col-lg-4 fw-bold"> Card Holder
                                         <span class="required"></span>
                                     </label>
                                     <!--end::Label-->
@@ -56,63 +49,78 @@
                                     <div class="col-lg-8">
                                         <!--begin::Input-->
                                         <input type="text" class="form-control form-control-lg form-control-solid"
-                                            name="card_number" placeholder="" value=""  data-inputmask-mask="9999 9999 9999 9999"/>
+                                            name="name" placeholder="" value="" required/>
                                         <!--end::Input-->
-                                    </div>
+                                    </div> --}}
                                     <!--end::Col-->
+                                    <div id="card-element" class="form-control" ></div>
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="row mb-7">
-                                    <!--begin::Label-->
-                                    <label class="col-lg-4 fw-bold"> CVV
-                                        <span class="required"></span>
-                                    </label>
-                                    <!--end::Label-->
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8">
-                                        <!--begin::Input-->
-                                        <input type="text" class="form-control form-control-lg form-control-solid"
-                                            name="cvv" placeholder="" value="" data-inputmask-mask="999" />
-                                        <!--end::Input-->
+
+                                {{-- <div class="col">
+                                    <div class="row mb-7">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 fw-bold"> Card Number
+                                            <span class="required"></span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8">
+                                            <!--begin::Input-->
+                                            <input type="text" class="form-control form-control-lg form-control-solid"
+                                                name="card_number" placeholder="" value=""  data-inputmask-mask="9999 9999 9999 9999" required/>
+                                            <!--end::Input-->
+                                        </div>
+                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Col-->
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="row mb-7">
-                                    <!--begin::Label-->
-                                    <label class="col-lg-4 fw-bold"> Card Expire (MM/YYYY)
-                                        <span class="required"></span>
-                                    </label>
-                                    <!--end::Label-->
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8">
-                                        <!--begin::Input-->
-                                        <input type="text" class="form-control form-control-lg form-control-solid"
-                                            name="cex" placeholder="" value="" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/yyyy" />
-                                        <!--end::Input-->
+                                <div class="col">
+                                    <div class="row mb-7">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 fw-bold"> CVV
+                                            <span class="required"></span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8">
+                                            <!--begin::Input-->
+                                            <input type="text" class="form-control form-control-lg form-control-solid"
+                                                name="cvv" placeholder="" value="" data-inputmask-mask="999" required/>
+                                            <!--end::Input-->
+                                        </div>
+                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Col-->
                                 </div>
+                                <div class="col">
+                                    <div class="row mb-7">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 fw-bold"> Card Expire (MM/YYYY)
+                                            <span class="required"></span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8">
+                                            <!--begin::Input-->
+                                            <input type="text" class="form-control form-control-lg form-control-solid"
+                                                name="cex" placeholder="" value="" data-inputmask-alias="datetime" data-inputmask-inputformat="mm/yyyy" required/>
+                                            <!--end::Input-->
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                </div> --}}
                             </div>
-                        </div>
-                        <!--end::Row-->
-                        <button type="button" class="btn btn-lg btn-primary float-end" data-kt-stepper-action="next"
-                            onClick="getSelectedCourses()">Pay now
-                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
-                            <span class="svg-icon svg-icon-3 ms-1 me-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none">
-                                    <rect opacity="0.5" x="18" y="13" width="13" height="2"
-                                        rx="1" transform="rotate(-180 18 13)" fill="black" />
-                                    <path
-                                        d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
-                                        fill="black" />
-                                </svg>
-                            </span>
-                            <!--end::Svg Icon-->
-                        </button>
+                            <!--end::Row-->
+                            <button type="submit" id="pay-btn" class="btn btn-lg btn-primary float-end" >Pay RM{{ $total }}.00                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
+                                <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Shopping/Credit-card.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <rect fill="#000000" opacity="0.3" x="2" y="5" width="20" height="14" rx="2"/>
+                                        <rect fill="#000000" x="2" y="8" width="20" height="3"/>
+                                        <rect fill="#000000" opacity="0.3" x="16" y="14" width="4" height="2" rx="1"/>
+                                    </g>
+                                </svg><!--end::Svg Icon--></span>
+                                <!--end::Svg Icon-->
+                            </button>
+                        </form>
 
                     </div>
                     <!--end::Card body-->
@@ -199,4 +207,44 @@
         </div>
     </div>
 
+@endsection
+
+@section('stripe')
+<script src="https://js.stripe.com/v3/"></script>
+    <script>
+        var stripe = Stripe('{{ env('STRIPE_KEY') }}')
+        var elements = stripe.elements();
+        var cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+  
+        function createToken() {
+            document.getElementById("pay-btn").disabled = true;
+            stripe.createToken(cardElement).then(function(result) {
+  
+                  
+                if(typeof result.error != 'undefined') {
+                    document.getElementById("pay-btn").disabled = false;
+                    alert(result.error.message);
+                }
+  
+                // creating token success
+                if(typeof result.token != 'undefined') {
+                    document.getElementById("stripe-token-id").value = result.token.id;
+                    document.getElementById('checkout-form').submit();
+                }
+            });
+        }
+        stripe.confirmPayment({
+            elements,
+            confirmParams: {
+                // Return URL where the customer should be redirected after the PaymentIntent is confirmed.
+                return_url: 'https://example.com',
+            },
+            })
+            .then(function(result) {
+            if (result.error) {
+                // Inform the customer that there was an error.
+            }
+        });
+    </script>
 @endsection

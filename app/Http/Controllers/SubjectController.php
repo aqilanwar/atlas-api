@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Auth;
 
 class SubjectController extends Controller
 {
@@ -14,8 +15,13 @@ class SubjectController extends Controller
      */
     public function FirstTimeRegister()
     {
-        $subjects = Subject::all();
-        return view('back-pages/register-subjects' , compact('subjects'));
+        $is_registered = Auth::user()->registered_course ; 
+        if($is_registered == 0){
+            $subjects = Subject::all();
+            return view('back-pages/register-subjects' , compact('subjects'));
+        }else{
+            return redirect()->route('profile');
+        }
     }
 
     /**

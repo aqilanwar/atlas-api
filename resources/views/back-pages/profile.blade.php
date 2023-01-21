@@ -17,6 +17,7 @@
                     data-bs-target="#kt_modal_edit_profile">Edit Profile</a>
                 <!--end::Action-->
             </div>
+
             <!--begin::Card header-->
             <!--begin::Card body-->
             <div class="card-body p-9">
@@ -27,7 +28,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-dark">Max Smith</span>
+                        <span class="fw-bolder fs-6 text-dark">{{ Auth::user()->name }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -35,26 +36,12 @@
                 <!--begin::Input group-->
                 <div class="row mb-7">
                     <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Company</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8 fv-row">
-                        <span class="fw-bold fs-6">Keenthemes</span>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Contact Phone
-                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
-                            title="Phone number must be active"></i></label>
+                    <label class="col-lg-4 fw-bold text-muted">Contact Phone</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 d-flex align-items-center">
-                        <span class="fw-bolder fs-6 me-2">044 3276 454 935</span>
-                        <span class="badge badge-success">Verified</span>
+                        <span class="fw-bolder fs-6 me-2">{{ Auth::user()->phone_number }}</span>
+                        {{-- <span class="badge badge-success">Verified</span> --}}
                     </div>
                     <!--end::Col-->
                 </div>
@@ -62,11 +49,72 @@
                 <!--begin::Input group-->
                 <div class="row mb-7">
                     <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Company Site</label>
+                    <label class="col-lg-4 fw-bold text-muted">Date of Birth</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <a href="#" class="fw-bold fs-6 text-dark text-hover-primary">keenthemes.com</a>
+                        <span class="fw-bolder fs-6 text-dark">{{ Auth::user()->dob }}</span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-bold text-muted">Email</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-dark">{{ Auth::user()->email }}</span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-bold text-muted">Address</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-dark">{{ Auth::user()->address }}</span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+            </div>
+            <div class="card-header cursor-pointer">
+                <!--begin::Card title-->
+                <div class="card-title m-0">
+                    <h3 class="fw-bolder m-0">Parents Details</h3>
+                </div>
+                <!--end::Card title-->
+            </div>
+            <div class="card-body p-9">
+                <!--begin::Row-->
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-bold text-muted">Parents Name</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-dark">{{ Auth::user()->parents_name }}</span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Row-->
+                <!--begin::Input group-->
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-bold text-muted">Contact Phone</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 d-flex align-items-center">
+                        <span class="fw-bolder fs-6 me-2">{{ Auth::user()->parents_phone_number }}</span>
+                        {{-- <span class="badge badge-success">Verified</span> --}}
                     </div>
                     <!--end::Col-->
                 </div>
@@ -74,41 +122,16 @@
                 <!--begin::Input group-->
                 <div class="row mb-7">
                     <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Country
-                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
-                            title="Country of origination"></i></label>
+                    <label class="col-lg-4 fw-bold text-muted">Address</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-dark">Germany</span>
+                        <span class="fw-bolder fs-6 text-dark">{{ Auth::user()->parents_address }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
                 <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Communication</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-dark">Email, Phone</span>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="row mb-10">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">Allow Changes</label>
-                    <!--begin::Label-->
-                    <!--begin::Label-->
-                    <div class="col-lg-8">
-                        <span class="fw-bold fs-6">Yes</span>
-                    </div>
-                    <!--begin::Label-->
-                </div>
-                <!--end::Input group-->
+
                 <!--begin::Notice-->
                 <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
                     <!--begin::Icon-->

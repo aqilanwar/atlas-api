@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\BillController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,6 +51,7 @@ Route::post('/update-detail/save', [ProfileController::class, 'SaveUpdateDetail'
 Route::get('/email_confirmation', [ProfileController::class, 'email_confirmation']);
 Route::get('/profile', [ProfileController::class, 'ShowProfile'])->name('profile');
 Route::post('/redirect-payment-page', [SubjectController::class, 'RedirectPaymentPage'])->name('redirect-payment-page');
+Route::post('/submit-payment', [BillController::class, 'SubmitPayment'])->name('submit-payment');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
