@@ -9,9 +9,13 @@
       <div class="col d-flex justify-content-center">
           <div class="card shadow p-3 mb-5 bg-white rounded border-0">  
             <img src="{{asset('assets/img/logo.png')}}" class="img-fluid mx-auto d-block" alt="...">
-
-                <p class="text-center h4 fw-bold ">Login</p>
-                <form class="mx-1 mx-md-4" method="POST" action="{{ route('login') }}">
+                  @if ($errors->any())
+                    <div class="alert alert-danger" role="alert">
+                      {{ $errors }}
+                    </div>
+                @endif     
+                <p class="text-center h4 fw-bold ">Staff Login</p>
+                <form class="mx-1 mx-md-4" method="POST" action="{{ route('staff.login.post') }}">
                   @csrf
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
@@ -42,16 +46,10 @@
                         <input type="password" name="password" id="form3Example4c" class="form-control" />
                     </div>
                   </div>
-
-                  <div class="d-flex justify-content-center">
-                    <p>
-                      Don't have an account ?  <a href="{{ route('register') }}">Register here</a>
-                    </p>
-                  </div>
                   <div class="d-flex justify-content-center mb-3">
     
                     <p>
-                      Forgot your password ?  <a href="{{ route('login') }}">Click here</a>
+                      Login as student ? <a href="{{ route('login') }}">Click here</a>
                     </p>
                   </div>
 

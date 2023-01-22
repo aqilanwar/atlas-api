@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Staff;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\Auth\LoginRequest;
+use Auth;
 class StaffController extends Controller
 {
     /**
@@ -12,9 +13,15 @@ class StaffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // public function __construct(){
+    //     $this->middleware('auth:staff');
+    // }
+
     public function index()
     {
-        //
+        // dd(Auth::guard('staff')->user()->name);
+        return view('back-pages/staff.profile');
     }
 
     /**
@@ -22,6 +29,18 @@ class StaffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function ShowCourses() {
+        
+        // show student 
+        // show courses -> show student
+        // show quiz/marks -> 
+        // create test
+        // 
+        return view('back-pages/staff.courses');
+
+    }
+
     public function create()
     {
         //
@@ -33,9 +52,9 @@ class StaffController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LoginRequest $request)
     {
-        //
+
     }
 
     /**

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
+use App\Models\Bill;
+use App\Models\Staff;
+use App\Models\student_subject;
+use App\Models\SubjectTeacher;
+use App\Models\Subject;
 
 class ProfileController extends Controller
 {
@@ -121,6 +126,25 @@ class ProfileController extends Controller
         $user->save();
 
         return redirect()->route('register-courses');
+
+    }
+    
+    public function ShowCourses() {
+        $user_id = Auth::user()->id ;
+
+        $data = Subject::join('student_subjects' , 'student_subjects.subject_id', '=' ,'subjects.id')
+                ->join('subject_teachers' , 'subject_teachers.subject_id' , '=' , 'subjects.id')
+                ->join('staff' , 'subject_teachers.teacher_id' , '=' , 'staff.id')
+                ->where('student_subjects.student_id' ,'=' , $user_id)
+                ->select('subjects.name as subject_name', 'staff.name', 'subjects.id')
+                ->get('subjects.name' , 'staff.name','subjects.id');
+
+        // return $data;
+        return view('back-pages/courses', compact('data'));
+    }
+
+    public function ShowAttendance(){
+        return view('back-pages/courses-attendance');
 
     }
 }

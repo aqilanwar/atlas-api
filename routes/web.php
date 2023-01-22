@@ -3,6 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\BillController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\Auth\StaffLoginController;
+
+// use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +23,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('front-pages/home');
 });
+
 Route::get('/log', function () {
     return view('front-pages/login');
 });
+
 Route::get('/register', function () {
     return view('front-pages/register');
 });
@@ -29,12 +35,11 @@ Route::get('/register', function () {
 //     return view('back-pages/profile');
 // })->name('profile');
 
-Route::get('/courses', function () {
-    return view('back-pages/courses');
-})->name('courses');
-
 
 Route::get('/update-detail', [ProfileController::class, 'ShowUpdateDetail'])->name('update-detail');
+Route::get('/courses', [ProfileController::class, 'ShowCourses'])->name('courses');
+Route::get('/courses/attendance', [ProfileController::class, 'ShowAttendance'])->name('courses-attendance');
+
 Route::get('/register-courses', [SubjectController::class, 'FirstTimeRegister'])->name('register-courses');
 
 
@@ -47,11 +52,14 @@ Route::get('/logout', function () {
     return redirect('/login');
 });
 
-Route::post('/update-detail/save', [ProfileController::class, 'SaveUpdateDetail'])->name('update-detail.save');
-Route::get('/email_confirmation', [ProfileController::class, 'email_confirmation']);
-Route::get('/profile', [ProfileController::class, 'ShowProfile'])->name('profile');
-Route::post('/redirect-payment-page', [SubjectController::class, 'RedirectPaymentPage'])->name('redirect-payment-page');
-Route::post('/submit-payment', [BillController::class, 'SubmitPayment'])->name('submit-payment');
+Route::middleware('auth')->group(function () {
+    Route::post('/update-detail/save', [ProfileController::class, 'SaveUpdateDetail'])->name('update-detail.save');
+    Route::get('/email_confirmation', [ProfileController::class, 'email_confirmation']);
+    Route::get('/profile', [ProfileController::class, 'ShowProfile'])->name('profile');
+    Route::post('/redirect-payment-page', [SubjectController::class, 'RedirectPaymentPage'])->name('redirect-payment-page');
+    Route::post('/submit-payment', [BillController::class, 'SubmitPayment'])->name('submit-payment');
+});
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -62,5 +70,17 @@ Route::post('/submit-payment', [BillController::class, 'SubmitPayment'])->name('
 //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
+
+
+//TEACHER ROUTE
+Route::get('/login/staff', [StaffLoginController::class ,'showLoginForm'])->name('staff.login');
+Route::post('/login/staff', [StaffLoginController::class ,'login'])->name('staff.login.post');
+Route::get('/logout/staff', [StaffLoginController::class ,'logout'])->name('staff.logout');
+//Admin Home page after login
+Route::group(['middleware'=>'staff'], function() {
+    Route::get('/staff/profile', [StaffController::class , 'index'])->name('staff.profile');
+    Route::get('/staff/courses', [StaffController::class , 'ShowCourses'])->name('staff.courses');
+});
+
 
 require __DIR__.'/auth.php';

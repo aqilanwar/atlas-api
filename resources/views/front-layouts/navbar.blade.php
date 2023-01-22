@@ -23,9 +23,21 @@
                 <li><a href="{{ route('logout')}}">Logout</a></li>
               </ul>
             </li>
+          @else
+            <li><a class="getstarted scrollto" href="{{route('login')}}">Login as student</a></li>
+          @endif
+          {{-- if(Auth::guard('staff')->check()) // this means that the admin was logged in. --}}
+
+          @if(Auth::guard('staff')->check())
+            <li class="dropdown"><a href="#"><span>{{ Auth::guard('staff')->user()->email }}</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a href="{{ route('staff.profile')}}">Profile</a></li>
+                <li><a href="{{ route('staff.logout')}}">Logout</a></li>
+              </ul>
+            </li>
             @else
-            <li><a class="getstarted scrollto" href="{{route('login')}}">Login</a></li>
-            @endif
+            <li><a class="getstarted scrollto" href="{{route('staff.login')}}">Login as admin</a></li>
+          @endif
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

@@ -854,7 +854,6 @@
             <!--end::Header-->
             <!--begin::Body-->
 
-            @foreach ($data as $subject)                
             <div class="card-body pt-1">
                 <!--begin::Item-->
                 <div class="d-flex flex-stack item-border-hover px-3 py-2 ms-n4 mb-3">
@@ -867,15 +866,15 @@
                         <!--end::Symbol-->
                         <!--begin::Title-->
                         <div class="ps-1 mb-1">
-                            <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-boldest">{{ $subject->subject_name }}</a>
-                            <div class="text-gray-400 fw-bold">{{ $subject->name }}</div>
+                            <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-boldest">asfdsadf</a>
+                            <div class="text-gray-400 fw-bold">asdfasd</div>
                         </div>
                         <!--end::Title-->
                     </div>
                     <!--end::Section-->
                     <!--begin::Label-->
                     <span class="badge rounded-pill fs-7 fw-boldest">
-                        <a href="{{ url('/courses/attendance/'.$subject->id)}}" class="btn btn-success my-2" tooltip="New App">Attendance</a>
+                        <a href="{{ url('/courses/attendance/')}}" class="btn btn-success my-2" tooltip="New App">Attendance</a>
                         <!--end::Button-->                                <!--begin::Button-->
                                 <a href="#" class="btn btn-danger my-2" tooltip="New App"
                                 data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">View Quiz/Test</a>
@@ -885,7 +884,6 @@
                 <!--end::Item-->
 
             </div>
-            @endforeach
             <!--end::Body-->
         </div>
         <!--end::List Widget 4-->
