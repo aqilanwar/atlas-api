@@ -745,8 +745,8 @@
             <!--begin::Header-->
             <div class="card-header align-items-center border-0 mt-5">
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="fw-bolder text-dark fs-2">Courses </span>
-                    <span class="text-gray-400 mt-2 fw-bold fs-6"></span>
+                    <span class="fw-bolder text-dark fs-2"> <a href="{{ route('courses') }}">Courses</a></span>
+                    <span class="text-gray-400 mt-2 fw-bold fs-6">List of all courses enrolled</span>
                 </h3>
                 <div class="card-toolbar">
                     <!--begin::Menu-->
@@ -875,7 +875,8 @@
                     <!--end::Section-->
                     <!--begin::Label-->
                     <span class="badge rounded-pill fs-7 fw-boldest">
-                        <a href="{{ url('/courses/attendance/'.$subject->id)}}" class="btn btn-success my-2" tooltip="New App">Attendance</a>
+                        
+                        <a href="{{ route('courses-attendance', $subject->id)}}" class="btn btn-success my-2">Attendance</a>
                         <!--end::Button-->                                <!--begin::Button-->
                                 <a href="#" class="btn btn-danger my-2" tooltip="New App"
                                 data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">View Quiz/Test</a>

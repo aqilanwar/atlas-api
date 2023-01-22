@@ -143,8 +143,13 @@ class ProfileController extends Controller
         return view('back-pages/courses', compact('data'));
     }
 
-    public function ShowAttendance(){
+    public function ShowAttendance(Request $request){
+        $request->id;
         return view('back-pages/courses-attendance');
 
+    }
+
+    public function ShowTimetable(){
+        return view('back-pages/timetable');
     }
 }
