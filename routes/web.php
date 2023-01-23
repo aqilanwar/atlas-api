@@ -41,7 +41,7 @@ Route::get('/courses', [ProfileController::class, 'ShowCourses'])->name('courses
 Route::get('/attendance/{id}', [ProfileController::class, 'ShowAttendance'])->name('courses-attendance');
 Route::get('/timetable', [ProfileController::class, 'ShowTimetable'])->name('timetable');
 Route::get('/payment', [ProfileController::class, 'ShowPayment'])->name('payment');
-
+Route::post('/update-user', [ProfileController::class, 'UpdateProfile'])->name('update-profile');
 Route::get('/register-courses', [SubjectController::class, 'FirstTimeRegister'])->name('register-courses');
 
 
@@ -82,6 +82,8 @@ Route::get('/logout/staff', [StaffLoginController::class ,'logout'])->name('staf
 Route::group(['middleware'=>'staff'], function() {
     Route::get('/staff/profile', [StaffController::class , 'index'])->name('staff.profile');
     Route::get('/staff/courses', [StaffController::class , 'ShowCourses'])->name('staff.courses');
+    Route::get('/staff/attendance/{id}', [StaffController::class , 'ShowAttendancePage'])->name('staff.attendance');
+    Route::post('/staff/attendance/create', [StaffController::class , 'CreateAttendance'])->name('create-attendance');
 });
 
 

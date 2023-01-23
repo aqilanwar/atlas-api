@@ -1,4 +1,5 @@
-                    <!--begin::Toolbar-->
+                 
+                 <!--begin::Toolbar-->
                     <div class="toolbar py-5 py-lg-15" id="kt_toolbar">
                         <!--begin::Container-->
                         <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
@@ -127,7 +128,7 @@
                                                         <div class="symbol symbol-30px me-4">
                                                             <span class="symbol-label bg-light">
                                                                 <img class="w-20px h-20px"
-                                                                    src="assets/media/svg/brand-logos/volicity-9.svg"
+                                                                    src="{{ asset('back-assets/media/svg/brand-logos/volicity-9.svg') }}"
                                                                     alt="" />
                                                             </span>
                                                         </div>
@@ -149,7 +150,7 @@
                                                         <div class="symbol symbol-30px me-4">
                                                             <span class="symbol-label bg-light">
                                                                 <img class="w-20px h-20px"
-                                                                    src="assets/media/svg/brand-logos/tvit.svg"
+                                                                    src="{{ asset('back-assets/media/svg/brand-logos/tvit.svg') }}"
                                                                     alt="" />
                                                             </span>
                                                         </div>
@@ -171,7 +172,7 @@
                                                         <div class="symbol symbol-30px me-4">
                                                             <span class="symbol-label bg-light">
                                                                 <img class="w-20px h-20px"
-                                                                    src="assets/media/svg/misc/infography.svg"
+                                                                    src="{{ asset('back-assets/media/svg/misc/infography.svg') }}"
                                                                     alt="" />
                                                             </span>
                                                         </div>
@@ -193,7 +194,7 @@
                                                         <div class="symbol symbol-30px me-4">
                                                             <span class="symbol-label bg-light">
                                                                 <img class="w-20px h-20px"
-                                                                    src="assets/media/svg/brand-logos/atica.svg"
+                                                                    src="{{ asset('back-assets/media/svg/brand-logos/atica.svg') }}"
                                                                     alt="" />
                                                             </span>
                                                         </div>
@@ -215,7 +216,7 @@
                                                         <div class="symbol symbol-30px me-4">
                                                             <span class="symbol-label bg-light">
                                                                 <img class="w-20px h-20px"
-                                                                    src="assets/media/svg/brand-logos/rgb.svg"
+                                                                    src="{{ asset('back-assets/media/svg/brand-logos/rgb.svg') }}"
                                                                     alt="" />
                                                             </span>
                                                         </div>
@@ -237,7 +238,7 @@
                                                         <div class="symbol symbol-30px me-4">
                                                             <span class="symbol-label bg-light">
                                                                 <img class="w-20px h-20px"
-                                                                    src="assets/media/svg/brand-logos/leaf.svg"
+                                                                    src="{{ asset('back-assets/media/svg/brand-logos/leaf.svg') }}"
                                                                     alt="" />
                                                             </span>
                                                         </div>
@@ -259,7 +260,7 @@
                                                         <div class="symbol symbol-30px me-4">
                                                             <span class="symbol-label bg-light">
                                                                 <img class="w-20px h-20px"
-                                                                    src="assets/media/svg/brand-logos/tower.svg"
+                                                                    src="{{ asset('back-assets/media/svg/brand-logos/tower.svg') }}"
                                                                     alt="" />
                                                             </span>
                                                         </div>
@@ -533,7 +534,7 @@
                                                         data-kt-search-category="users">
                                                         <!--begin::Symbol-->
                                                         <div class="symbol symbol-30px me-4">
-                                                            <img src="assets/media/avatars/150-1.jpg"
+                                                            <img src="{{ asset('back-assets/media/avatars/150-1.jpg') }}"
                                                                 alt="" />
                                                         </div>
                                                         <!--end::Symbol-->
@@ -551,7 +552,7 @@
                                                         data-kt-search-category="users">
                                                         <!--begin::Symbol-->
                                                         <div class="symbol symbol-30px me-4">
-                                                            <img src="assets/media/avatars/150-3.jpg"
+                                                            <img src="{{ asset('back-assets/media/avatars/150-3.jpg') }}"
                                                                 alt="" />
                                                         </div>
                                                         <!--end::Symbol-->
@@ -569,7 +570,7 @@
                                                         data-kt-search-category="users">
                                                         <!--begin::Symbol-->
                                                         <div class="symbol symbol-30px me-4">
-                                                            <img src="assets/media/avatars/150-4.jpg"
+                                                            <img src="{{ asset('back-assets/media/avatars/150-4.jpg') }}"
                                                                 alt="" />
                                                         </div>
                                                         <!--end::Symbol-->
@@ -587,7 +588,7 @@
                                                         data-kt-search-category="users">
                                                         <!--begin::Symbol-->
                                                         <div class="symbol symbol-30px me-4">
-                                                            <img src="assets/media/avatars/150-6.jpg"
+                                                            <img src="{{ asset('back-assets/media/avatars/150-6.jpg') }}"
                                                                 alt="" />
                                                         </div>
                                                         <!--end::Symbol-->
@@ -605,7 +606,7 @@
                                                         data-kt-search-category="users">
                                                         <!--begin::Symbol-->
                                                         <div class="symbol symbol-30px me-4">
-                                                            <img src="assets/media/avatars/150-8.jpg"
+                                                            <img src="{{ asset('back-assets/media/avatars/150-8.jpg') }}"
                                                                 alt="" />
                                                         </div>
                                                         <!--end::Symbol-->
@@ -623,7 +624,7 @@
                                                         data-kt-search-category="users">
                                                         <!--begin::Symbol-->
                                                         <div class="symbol symbol-30px me-4">
-                                                            <img src="assets/media/avatars/150-11.jpg"
+                                                            <img src="{{ asset('back-assets/media/avatars/150-11.jpg') }}"
                                                                 alt="" />
                                                         </div>
                                                         <!--end::Symbol-->
@@ -641,7 +642,7 @@
                                                         data-kt-search-category="users">
                                                         <!--begin::Symbol-->
                                                         <div class="symbol symbol-30px me-4">
-                                                            <img src="assets/media/avatars/150-12.jpg"
+                                                            <img src="{{ asset('back-assets/media/avatars/150-12.jpg') }}"
                                                                 alt="" />
                                                         </div>
                                                         <!--end::Symbol-->
@@ -920,7 +921,7 @@
                                                 <!--end::Message-->
                                                 <!--begin::Illustration-->
                                                 <div class="text-center px-4">
-                                                    <img src="assets/media/illustrations/dozzy-1/2.png" alt=""
+                                                    <img src="{{ asset('back-assets/media/illustrations/dozzy-1/2.png') }}" alt=""
                                                         class="w-100 h-200px" />
                                                 </div>
                                                 <!--end::Illustration-->

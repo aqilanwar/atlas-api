@@ -13,7 +13,7 @@
 											<div class="d-flex flex-center flex-column mb-10">
 												<!--begin::Avatar-->
 												<div class="symbol mb-3 symbol-100px symbol-circle">
-													<img alt="Pic" src="assets/media/avatars/150-26.jpg" />
+													<img alt="Pic" src="{{ asset('back-assets/media/avatars/150-26.jpg') }}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Name-->

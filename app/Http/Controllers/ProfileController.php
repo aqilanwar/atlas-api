@@ -128,6 +128,39 @@ class ProfileController extends Controller
         return redirect()->route('register-courses');
 
     }
+
+    public function UpdateProfile(Request $request){
+        $user_id = Auth::user()->id ;
+        $validatedData = $request->validate([
+            'name' => ['required'],
+            'dob' => ['required'],
+            'phone_number' => ['required'],
+            'address' => ['required'],
+            'parents_name' => ['required'],
+            'parents_phone_number' => ['required'],
+            'parents_address' => ['required'],
+            
+        ],
+        [
+            'dob.required' => 'Date of birth is required',
+        ]);
+
+        $user = User::find($user_id);
+        // dd($user);
+        $user->name = $request->name;
+        $user->dob= $request-> dob;
+        $user->phone_number = trim($request->phone_number , '_');
+        $user->address = $request->address;
+        $user->parents_name = $request->parents_name;
+        $user->parents_phone_number = trim($request->parents_phone_number, '_');
+        $user->parents_address = $request->parents_address;
+        // $user->updated_profile = 1; 
+        $user->updated_at = now(); 
+        $user->save();
+
+        return back()->with('message', 'Successfully updated your profile');
+
+    }   
     
     public function ShowCourses() {
         $user_id = Auth::user()->id ;

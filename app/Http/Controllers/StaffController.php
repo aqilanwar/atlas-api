@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Staff;
+use App\Models\Subject;
+use App\Models\SubjectTeacher;
+use App\Models\Attendance;
+
 use Illuminate\Http\Request;
 use App\Http\Requests\Auth\LoginRequest;
 use Auth;
@@ -32,18 +36,41 @@ class StaffController extends Controller
 
     public function ShowCourses() {
         
-        // show student 
-        // show courses -> show student
-        // show quiz/marks -> 
-        // create test
-        // 
-        return view('back-pages/staff.courses');
+        $user_id = Auth::guard('staff')->user()->id ;
+
+        $data = Subject::join('subject_teachers' , 'subject_teachers.subject_id' , '=' , 'subjects.id')
+                ->join('staff' , 'subject_teachers.teacher_id' , '=' , 'staff.id')
+                ->where('subject_teachers.teacher_id' ,'=' , $user_id)
+                ->select('subjects.name as subject_name', 'staff.name', 'subjects.id')
+                ->get('subjects.name' , 'staff.name','subjects.id');
+
+        return view('back-pages/staff.courses', compact('data'));
 
     }
 
-    public function create()
-    {
-        //
+    public function ShowAttendancePage($id)
+    {   
+        $data = Subject::find($id); 
+        $attendance = Attendance::where('subject_id' , $id)->get();
+        return view('back-pages/staff.courses-attendance' , compact('data','attendance'));
+    }
+    public function CreateAttendance(Request $request)
+    {   
+        $request->validate([
+            'title' => 'required',
+            'start_date' => 'required|date|before:end_date',
+            'end_date' => 'required|date',
+        ]);
+
+        Attendance::insert([
+            'title' => $request->title,
+            'subject_id' => $request->subject_id,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'created_at' => now(),
+        ]);
+
+        return back()->with('success', 'Attendance has been created successfully!');
     }
 
     /**

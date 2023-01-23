@@ -69,7 +69,7 @@
 											<!--begin::Menu-->
 											<div class="menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px" data-kt-menu="true">
 												<!--begin::Heading-->
-												<div class="d-flex flex-column bgi-no-repeat rounded-top" style="background-image:url('assets/media//patterns/dropdown-header-bg.png')">
+												<div class="d-flex flex-column bgi-no-repeat rounded-top" style="background-image:url('{{ asset('back-assets/media//patterns/dropdown-header-bg.png') }}')">
 													<!--begin::Title-->
 													<h3 class="text-white fw-bold px-9 mt-10 mb-6">Notifications
 													<span class="fs-8 opacity-75 ps-3">24 reports</span></h3>
@@ -353,7 +353,7 @@
 															<!--end::Section-->
 															<!--begin::Illustration-->
 															<div class="text-center mb-5 px-4">
-																<img src="assets/media/illustrations/dozzy-1/3.png" alt="" class="w-100 mh-175px" />
+																<img src="{{ asset('back-assets/media/illustrations/dozzy-1/3.png') }}" alt="" class="w-100 mh-175px" />
 															</div>
 															<!--end::Illustration-->
 														</div>
@@ -628,7 +628,7 @@
 											<!--begin::Menu-->
 											<div class="menu menu-sub menu-sub-dropdown menu-column w-250px w-lg-325px" data-kt-menu="true">
 												<!--begin::Heading-->
-												<div class="d-flex flex-column flex-center bgi-no-repeat rounded-top px-9 py-10" style="background-image:url('assets/media//patterns/dropdown-header-bg.png')">
+												<div class="d-flex flex-column flex-center bgi-no-repeat rounded-top px-9 py-10" style="background-image:url('{{ asset('back-assets/media//patterns/dropdown-header-bg.png') }}')">
 													<!--begin::Title-->
 													<h3 class="text-white fw-bold mb-3">Quick Links</h3>
 													<!--end::Title-->
@@ -727,7 +727,7 @@
 										<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 											<!--begin::Menu wrapper-->
 											<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-													<img alt="Pic" src="assets/media/avatars/150-26.jpg" />
+													<img alt="Pic" src="{{ asset('back-assets/media/avatars/150-26.jpg') }}" />
 											</div>
 											<!--begin::Menu-->
 											<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -736,7 +736,7 @@
 													<div class="menu-content d-flex align-items-center px-3">
 														<!--begin::Avatar-->
 														<div class="symbol symbol-50px me-5">
-															<img alt="Logo" src="assets/media/avatars/150-26.jpg" />
+															<img alt="Logo" src="{{ asset('back-assets/media/avatars/150-26.jpg') }}" />
 														</div>
 														<!--end::Avatar-->
 														<!--begin::Username-->
