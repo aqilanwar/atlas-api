@@ -860,14 +860,14 @@
                 <!--begin::Section-->
                 <div class="d-flex align-items-center">
                     <!--begin::Symbol-->
-                    <div class="symbol symbol-40px symbol-circle me-4">
+                    {{-- <div class="symbol symbol-40px symbol-circle me-4">
                         <img src="/assets/media/avatars/150-26.jpg" alt="">
-                    </div>
+                    </div> --}}
                     <!--end::Symbol-->
                     <!--begin::Title-->
                     <div class="ps-1 mb-1">
-                        <a href="#" class="fs-5 text-gray-800 text-hover-primary fw-boldest">{{ $subject->subject_name }}</a>
-                        <div class="text-gray-400 fw-bold">{{ $subject->name }}</div>
+                        <a class="fs-5 text-gray-800 text-hover-primary fw-boldest">{{ $subject->subject_name }}</a>
+                        <div class="text-gray-400 fw-bold">Total student : {{ $subject->total_student }}</div>
                     </div>
                     <!--end::Title-->
                 </div>

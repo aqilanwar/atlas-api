@@ -45,7 +45,14 @@ class StaffController extends Controller
                 ->where('subject_teachers.teacher_id' ,'=' , $user_id)
                 ->select('subjects.name as subject_name', 'staff.name', 'subjects.id')
                 ->get('subjects.name' , 'staff.name','subjects.id');
+                
 
+        foreach($data as $dat){
+            $totalStudent = student_subject::where('subject_id' , $dat->id)->count();
+            // echo json_encode($totalStudent);
+            $dat->total_student = $totalStudent;
+        }
+        // dd(json_encode($data));
         return view('back-pages/staff.courses', compact('data'));
 
     }
@@ -94,7 +101,6 @@ class StaffController extends Controller
         ->select('student_attendances.updated_at as clocked_in', 'students.name')
         ->get();  
         // echo json_encode($data);
-
 
         $attendanceId = Attendance::find($attendanceId);
             // dd(json_encode($attendanceId));

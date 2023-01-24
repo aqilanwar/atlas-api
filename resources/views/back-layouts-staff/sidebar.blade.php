@@ -34,7 +34,7 @@
 												<!--begin::Menu item-->
 												<li class="menu-item mb-1">
 													<!--begin::Menu link-->
-													<a class="menu-link px-6 py-4 {{ Route::is('profile') ? 'active' : '' }}" href="{{ route('profile')}}">
+													<a class="menu-link px-6 py-4 {{ Route::is('staff.profile') ? 'active' : '' }}" href="{{ route('staff.profile')}}">
 														<span class="menu-bullet">
 															<span class="bullet"></span>
 														</span>
@@ -46,7 +46,7 @@
 												<!--begin::Menu item-->
 												<li class="menu-item mb-1">
 													<!--begin::Menu link-->
-													<a class="menu-link px-6 py-4 {{ Route::is('courses') ? 'active' : '' }}" href="{{ route('courses')}}">
+													<a class="menu-link px-6 py-4 {{ Route::is('staff.courses' , 'staff.attendance' , 'staff.view.attendance' ) ? 'active' : '' }}" href="{{ route('staff.courses')}}">
 														<span class="menu-bullet">
 															<span class="bullet"></span>
 														</span>
