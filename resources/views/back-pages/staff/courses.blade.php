@@ -876,9 +876,9 @@
                 <span class="badge rounded-pill fs-7 fw-boldest">
                     
                     <a href="{{ route('staff.attendance', $subject->id)}}" class="btn btn-success my-2">Manage Attendance</a>
-                    <!--end::Button-->                                <!--begin::Button-->
-                            <a href="#" class="btn btn-danger my-2" tooltip="New App"
-                            data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create Quiz/Test</a>
+                    <!--end::Button-->                           
+                    <a href="{{ route('staff.test', $subject->id)}}" class="btn btn-danger my-2">Manage Quiz/Test</a>
+
                         <!--end::Button--></span>
                 <!--end::Label-->
             </div>

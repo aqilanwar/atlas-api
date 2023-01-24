@@ -7,7 +7,9 @@ use App\Models\Subject;
 use App\Models\SubjectTeacher;
 use App\Models\Attendance;
 use App\Models\StudentAttendance;
+use App\Models\StudentTest;
 use App\Models\student_subject;
+use App\Models\Test;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Auth\LoginRequest;
@@ -101,10 +103,70 @@ class StaffController extends Controller
         ->select('student_attendances.updated_at as clocked_in', 'students.name')
         ->get();  
         // echo json_encode($data);
-
+        $subjectId = Subject::find($subjectId); 
         $attendanceId = Attendance::find($attendanceId);
             // dd(json_encode($attendanceId));
         return view('back-pages/staff.courses-view-attendance' , compact('data', 'subjectId' , 'attendanceId' ));
+    }
+
+
+    public function ShowTestPage($id)
+    {   
+        $data = Subject::find($id); 
+        $tests = Test::where('subject_id' , $id)->get();
+        // dd(json_encode($tests));
+        return view('back-pages/staff.courses-test', compact('data' , 'tests'));
+    }
+
+    public function CreateTest(Request $request)
+    {   
+        $request->validate([
+            'title' => 'required',
+        ]);
+
+        $test_id = Test::insertGetId([
+            'title' => $request->title,
+            'subject_id' => $request->subject_id,
+            'created_at' => now(),
+        ]);
+
+        // dd($attendance_id);
+
+        $students = student_subject::select('student_id')->where('subject_id' , $request->subject_id)->get();
+        // dd(json_encode($students));
+        foreach($students as $student){
+            StudentTest::create([
+                'test_id' => $test_id,
+                'student_id' => $student->student_id,
+                'created_at' => now(),
+            ]);
+        }
+
+        return back()->with('success', 'Test has been created successfully!');
+    }
+
+    public function ViewTest($subjectId, $testId)
+    {   
+        $data = StudentTest::join('students' , 'students.id' , '=' , 'student_tests.student_id')
+        ->where('student_tests.test_id' ,'=' , $testId)
+        ->select('student_tests.updated_at as updated_at', 'students.name' , 'student_tests.marks' ,'student_tests.id as student_test_id')
+        ->get();  
+        // echo json_encode($data);
+        $subjectId = Subject::find($subjectId);
+        $testId = Test::find($testId);
+            // dd(json_encode($attendanceId));
+        return view('back-pages/staff.courses-view-test' , compact('data', 'subjectId' , 'testId' ));
+    }
+
+    public function UpdateTest(Request $request){
+        $request->student_test_id ;
+        StudentTest::find($request->student_test_id)
+        ->update([
+            'marks' => $request->marks,
+        ]);
+
+        return back()->with('success', 'Test marks has been updated !');
+
     }
 
     /**
@@ -115,7 +177,7 @@ class StaffController extends Controller
      */
     public function store(LoginRequest $request)
     {
-
+        
     }
 
     /**

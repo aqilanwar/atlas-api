@@ -82,9 +82,18 @@ Route::get('/logout/staff', [StaffLoginController::class ,'logout'])->name('staf
 Route::group(['middleware'=>'staff'], function() {
     Route::get('/staff/profile', [StaffController::class , 'index'])->name('staff.profile');
     Route::get('/staff/courses', [StaffController::class , 'ShowCourses'])->name('staff.courses');
+    
+    //Attendance
     Route::get('/staff/attendance/show/{id}', [StaffController::class , 'ShowAttendancePage'])->name('staff.attendance');
     Route::get('/staff/attendance/view/{subject_id}/{attendance_id}', [StaffController::class , 'ViewAttendance'])->name('staff.view.attendance');
     Route::post('/staff/attendance/create', [StaffController::class , 'CreateAttendance'])->name('create-attendance');
+
+    //Test
+    Route::get('/staff/test/show/{id}', [StaffController::class , 'ShowTestPage'])->name('staff.test');
+    Route::get('/staff/test/view/{subject_id}/{test_id}', [StaffController::class , 'ViewTest'])->name('staff.view.test');   
+    Route::post('/staff/test/create', [StaffController::class , 'CreateTest'])->name('create-test');
+    Route::post('/staff/test/update', [StaffController::class , 'UpdateTest'])->name('update-test');
+
 });
 
 

@@ -29,9 +29,9 @@
                 <h3 class="card-title align-items-start flex-column">
                     <span class="fw-bolder text-dark fs-2"> <a href="{{ route('staff.courses') }}">Courses</a></span>
                     <span class="text-gray-400 mt-2 fw-bold fs-6">
-                        <a >Attendance</a> 
+                        <a >Test</a> 
                         /
-                        <a href="{{ route('staff.attendance' , $data->id) }}">{{ $data->name }}</a> 
+                        <a href="{{ route('staff.test' , $data->id) }}">{{ $data->name }}</a> 
                     </span>
                     </span>
                 </h3>
@@ -39,7 +39,7 @@
                 <!--end::Card title-->
                 <!--begin::Action-->
                 <a href="#" class="btn btn-primary align-self-center" data-bs-toggle="modal"
-                    data-bs-target="#kt_modal_edit_profile">+ Create Attendance</a>
+                    data-bs-target="#kt_modal_edit_profile">+ Create Test</a>
                 <!--end::Action-->
             </div>
             <!--end::Header-->
@@ -52,14 +52,17 @@
                         <tbody>
                             <!--begin::Table row-->
                             <tr class="text-start text-gray-400 fw-boldest fs-7 text-uppercase">
+                                <th class="min-w-200px px-0">No.</th>
                                 <th class="min-w-200px px-0">Title</th>
-                                <th class="min-w-125px">Start Date</th>
-                                <th class="min-w-125px">End Date</th>
+                                <th class="min-w-125px">Created at</th>
                                 <th class="text-end pe-2 min-w-70px">Action</th>
                             </tr>
                             <!--end::Table row-->
                             <!--begin::Table row-->
-                            @foreach ($attendance as $attend)                                
+                            @php
+                                $i=1;
+                            @endphp
+                            @foreach ($tests as $test)                                
                             <tr>
                                 <!--begin::Author=-->
                                 <td class="p-0">
@@ -67,9 +70,8 @@
                                         <div class="ps-3">
                                             <a 
                                                 class="text-gray-800 fw-boldest fs-5 text-hover-primary mb-1">
-                                                {{ $attend->title }}
+                                                {{ $i++ }}
                                             </a>
-                                            <span class="text-gray-400 fw-bold d-block">Created at : {{ $attend->created_at }}</span>
                                         </div>
                                     </div>
                                 </td>
@@ -79,30 +81,25 @@
                                     <div class="ps-3">
                                         <a 
                                             class="text-gray-800 fw-boldest fs-5 text-hover-primary mb-1">
-                                            {{ date('d F Y', strtotime($attend->start_date)) }}
+                                            {{ $test->title}}
                                         </a>
-                                        <span class="text-gray-400 fw-bold d-block">
-                                            {{ date('h:i a', strtotime($attend->start_date)) }}
-                                        </span>
+
                                     </div>
                                 </td>
                                 <td >
                                     <div class="ps-3">
                                         <a 
                                             class="text-gray-800 fw-boldest fs-5 text-hover-primary mb-1">
-                                            {{ date('d F Y', strtotime($attend->end_date)) }}
-                                        </a>
-                                        <span class="text-gray-400 fw-bold d-block">
-                                            {{ date('h:i a', strtotime($attend->end_date)) }}
-                                        </span>                                    
+                                            {{ date('d F Y h:i a', strtotime($test->created_at)) }}
+                                        </a>                                  
                                     </div>
                                 </td>
 
                                 <!--end::Company=-->
- 
+
                                 <td class="pe-0">
-                                    <a href="{{ route('staff.view.attendance' , ['subject_id' => $data->id , 'attendance_id' => $attend->id]) }}" class="btn btn-primary align-self-center"
-                                    >View Attendance</a>
+                                    <a href="{{ route('staff.view.test' , ['subject_id' => $data->id , 'test_id' => $test->id])}}" class="btn btn-primary align-self-center"
+                                    >View</a>
                 
                                 </td>
                             </tr>
@@ -147,12 +144,12 @@
 					<!--begin::Modal header-->
 					<!--begin::Modal body-->
 					<div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
-                        <form action="{{ route('create-attendance') }}" method="POST">
+                        <form action="{{ route('create-test') }}" method="POST">
                             @csrf
                             <!--begin::Heading-->
                             <div class="text-center mb-13">
                                 <!--begin::Title-->
-                                <h1 class="mb-3">Create Attendance</h1>
+                                <h1 class="mb-3">Create Test</h1>
                                 <!--end::Title-->
                             </div>
                             <!--end::Heading-->
@@ -168,20 +165,9 @@
                             <input class="form-control form-control-solid mb-8" name="title" value="{{ old('title') }}" placeholder="Enter title" required >
                             <!--end::Input fills-->
     
-                            <!--start::Input fills-->
-                            <label for="form-control">Start date : </label>
-                            <input class="form-control form-control-solid mb-8" type="datetime-local" name="start_date" value="{{ old('start_date') }}" placeholder="Enter start date" required>
-                            <!--end::Input fills-->
-    
-                            <!--start::Input fills-->
-                            <label for="form-control">End date: </label>
-                            <input class="form-control form-control-solid mb-8" type="datetime-local" name="end_date" value="{{ old('end_date') }}" placeholder="Enter end date" required>
-                            <!--end::Input fills-->
-    
-    
                             <!--begin::Wrapper-->
                             <div class="float-end">
-                                <button type="submit" class="btn btn-lg btn-light-primary">Create Attendance</button>
+                                <button type="submit" class="btn btn-lg btn-light-primary">Create Test</button>
                             </div>
                             <!--end::Wrapper-->
                         </form>
