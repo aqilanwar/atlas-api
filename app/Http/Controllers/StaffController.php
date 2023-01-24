@@ -86,10 +86,11 @@ class StaffController extends Controller
         $students = student_subject::select('student_id')->where('subject_id' , $request->subject_id)->get();
         // dd($students);
         foreach($students as $student){
-            StudentAttendance::create([
+            StudentAttendance::insert([
                 'attendance_id' => $attendance_id,
                 'student_id' => $student->student_id,
                 'created_at' => now(),
+                'updated_at' => null,
             ]);
         }
 

@@ -38,7 +38,9 @@ Route::get('/register', function () {
 
 Route::get('/update-detail', [ProfileController::class, 'ShowUpdateDetail'])->name('update-detail');
 Route::get('/courses', [ProfileController::class, 'ShowCourses'])->name('courses');
-Route::get('/attendance/{id}', [ProfileController::class, 'ShowAttendance'])->name('courses-attendance');
+Route::get('/attendance/{subject_id}', [ProfileController::class, 'ShowAttendance'])->name('courses-attendance');
+Route::get('/test/{subject_id}', [ProfileController::class, 'ShowTest'])->name('courses-test');
+Route::get('/update-attendance/{attendance_id}', [ProfileController::class, 'SignAttendance'])->name('courses-sign-attendance');
 Route::get('/timetable', [ProfileController::class, 'ShowTimetable'])->name('timetable');
 Route::get('/payment', [ProfileController::class, 'ShowPayment'])->name('payment');
 Route::post('/update-user', [ProfileController::class, 'UpdateProfile'])->name('update-profile');

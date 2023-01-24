@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
 use App\Models\Bill;
 use App\Models\Staff;
+use App\Models\StudentAttendance;
+use App\Models\Attendance;
 use App\Models\student_subject;
 use App\Models\SubjectTeacher;
 use App\Models\Subject;
+use App\Models\Test;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
@@ -176,10 +180,63 @@ class ProfileController extends Controller
         return view('back-pages/courses', compact('data'));
     }
 
-    public function ShowAttendance(Request $request){
-        $request->id;
-        return view('back-pages/courses-attendance');
+    public function ShowAttendance($subject_id){
+        $user_id = Auth::user()->id ;
 
+        $attendances = Attendance::join('student_attendances', 'attendances.id', '=', 'student_attendances.attendance_id')
+        ->where([
+            ['subject_id', $subject_id],
+            ['student_id', $user_id]
+        ])
+        ->select('attendances.title', 'attendances.start_date', 'attendances.end_date' , 'student_attendances.id as student_attendance_id' ,'student_attendances.updated_at as clocked_in')
+        ->orderBy('student_attendances.created_at' , 'desc')
+        ->paginate(5);
+        // ->get();    
+        $subject_id = Subject::find($subject_id);
+        return view('back-pages/courses-attendance' , compact('attendances' , 'subject_id'));
+
+    }
+
+    public function SignAttendance($attendance_id) {
+        StudentAttendance::where('id', $attendance_id)
+        ->update(
+            [
+            'updated_at' => now(),
+            ]
+        );
+
+        return back()->with('success', 'Successfully clocked in.');
+    }
+
+    public function ShowTest($subject_id){
+        $user_id = Auth::user()->id ;
+        
+        // //
+        // $attendances = Attendance::join('student_attendances', 'attendances.id', '=', 'student_attendances.attendance_id')
+        // ->where([
+        //     ['subject_id', $subject_id],
+        //     ['student_id', $user_id]
+        // ])
+        // ->select('attendances.title', 'attendances.start_date', 'attendances.end_date' , 'student_attendances.id as student_attendance_id' ,'student_attendances.updated_at as clocked_in')
+        // ->orderBy('student_attendances.created_at' , 'desc')
+        // ->paginate(5);
+        // $subject_id = Subject::find($subject_id);
+        //
+
+        $tests = Test::join('student_tests', 'tests.id' , '=' , 'student_tests.test_id')
+        ->where([
+            ['subject_id', $subject_id],
+            ['student_id', $user_id]
+        ])
+        ->select('student_tests.marks', 'tests.title', 'student_tests.created_at')
+        ->orderBy('student_tests.created_at' , 'desc')
+        ->paginate(5);
+
+        // dd(json_encode($tests));
+        $subject_id = Subject::find($subject_id);
+
+
+        return view('back-pages/courses-test' , compact('subject_id' , 'tests'));
     }
 
     public function ShowTimetable(){
