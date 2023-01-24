@@ -6,6 +6,8 @@ use App\Models\Staff;
 use App\Models\Subject;
 use App\Models\SubjectTeacher;
 use App\Models\Attendance;
+use App\Models\StudentAttendance;
+use App\Models\student_subject;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Auth\LoginRequest;
@@ -62,7 +64,7 @@ class StaffController extends Controller
             'end_date' => 'required|date',
         ]);
 
-        Attendance::insert([
+        $attendance_id = Attendance::insertGetId([
             'title' => $request->title,
             'subject_id' => $request->subject_id,
             'start_date' => $request->start_date,
@@ -70,7 +72,33 @@ class StaffController extends Controller
             'created_at' => now(),
         ]);
 
+        // dd($attendance_id);
+
+        $students = student_subject::select('student_id')->where('subject_id' , $request->subject_id)->get();
+        // dd($students);
+        foreach($students as $student){
+            StudentAttendance::create([
+                'attendance_id' => $attendance_id,
+                'student_id' => $student->student_id,
+                'created_at' => now(),
+            ]);
+        }
+
         return back()->with('success', 'Attendance has been created successfully!');
+    }
+
+    public function ViewAttendance($subjectId, $attendanceId)
+    {   
+        $data = StudentAttendance::join('students' , 'students.id' , '=' , 'student_attendances.student_id')
+        ->where('student_attendances.attendance_id' ,'=' , $attendanceId)
+        ->select('student_attendances.updated_at as clocked_in', 'students.name')
+        ->get();  
+        // echo json_encode($data);
+
+
+        $attendanceId = Attendance::find($attendanceId);
+            // dd(json_encode($attendanceId));
+        return view('back-pages/staff.courses-view-attendance' , compact('data', 'subjectId' , 'attendanceId' ));
     }
 
     /**

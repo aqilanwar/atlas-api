@@ -28,7 +28,9 @@
                 <!--begin::Card title-->
                 <h3 class="card-title align-items-start flex-column">
                     <span class="fw-bolder text-dark fs-2"> <a href="{{ route('staff.courses') }}">Courses</a></span>
-                    <span class="text-gray-400 mt-2 fw-bold fs-6">Attendance / {{ $data->name }}</span>
+                    <span class="text-gray-400 mt-2 fw-bold fs-6">
+                        <a href="{{ route('staff.attendance' ,$data->id) }}">Attendance</a> </span>
+                    </span>
                 </h3>
 
                 <!--end::Card title-->
@@ -96,9 +98,9 @@
                                 <!--end::Company=-->
  
                                 <td class="pe-0">
-                                    <span class="form-check form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" name="selected_courses[]" />
-                                    </span>
+                                    <a href="{{ route('staff.view.attendance' , ['subject_id' => $data->id , 'attendance_id' => $attend->id]) }}" class="btn btn-primary align-self-center"
+                                    >View Attendance</a>
+                
                                 </td>
                             </tr>
                             @endforeach
