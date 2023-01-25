@@ -94,6 +94,12 @@ Route::group(['middleware'=>'staff'], function() {
     Route::post('/staff/test/create', [StaffController::class , 'CreateTest'])->name('create-test');
     Route::post('/staff/test/update', [StaffController::class , 'UpdateTest'])->name('update-test');
 
+    //admin route
+    Route::get('/admin/courses', [StaffController::class , 'AdminCourse'])->name('admin.courses');
+    Route::post('/admin/courses/create', [StaffController::class , 'AdminCreateCourse'])->name('admin.create.courses');
+    Route::get('/admin/courses/show/{subject_id}', [StaffController::class , 'AdminViewCourse'])->name('admin.view.courses');
+
+
 });
 
 

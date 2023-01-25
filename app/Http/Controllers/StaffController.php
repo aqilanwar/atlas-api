@@ -10,6 +10,7 @@ use App\Models\StudentAttendance;
 use App\Models\StudentTest;
 use App\Models\student_subject;
 use App\Models\Test;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Auth\LoginRequest;
@@ -170,59 +171,62 @@ class StaffController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(LoginRequest $request)
-    {
-        
+    public function AdminCourse(){
+                
+        $data = Subject::join('subject_teachers' , 'subject_teachers.subject_id' , '=' , 'subjects.id')
+                ->join('staff' , 'subject_teachers.teacher_id' , '=' , 'staff.id')
+                // ->where('subject_teachers.teacher_id' ,'=' , 'subject.teacher_id')
+                ->select('subjects.name as subject_name', 'staff.name', 'subjects.id')
+                ->get('subjects.name' , 'staff.name','subjects.id');
+                
+
+        foreach($data as $dat){
+            $totalStudent = student_subject::where('subject_id' , $dat->id)->count();
+            // echo json_encode($totalStudent);
+            $dat->total_student = $totalStudent;
+        }
+
+        $teachers = Staff::where('is_admin', 0)->get();
+
+
+        // return $data;
+        // dd();
+        return view('back-pages/admin.courses', compact('data' ,'teachers'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Staff  $staff
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Staff $staff)
-    {
-        //
-    }
+    public function AdminCreateCourse(Request $request){
+        $subject_id = Subject::insertGetId([
+            'name' => $request->name,
+            'price' => $request->price,
+            'time' => $request->time,
+            'day' => $request->day,
+            'created_at' => now(),
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Staff  $staff
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Staff $staff)
-    {
-        //
-    }
+        SubjectTeacher::insert([
+            'teacher_id' => $request->teacher_id,
+            'subject_id' => $subject_id,
+        ]);
+        return back()->with('success', 'Course successfully added !');
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Staff  $staff
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Staff $staff)
-    {
-        //
     }
+    // 2. /view course
+    // -edit course (name,price)
+    // -display teacher, and all student.
+    // -delete course
+    
+    public function AdminViewCourse($subject_id){
+        $teacher = Subject::join('subject_teachers' , 'subject_teachers.subject_id' , '=' , 'subjects.id')
+        ->join('staff' , 'subject_teachers.teacher_id' , '=' , 'staff.id')
+        ->where('subject_teachers.subject_id' ,'=' , $subject_id)
+        ->select('subjects.name as subject_name', 'staff.name', 'subjects.id')
+        ->get('subjects.name' , 'staff.name','subjects.id');
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Staff  $staff
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Staff $staff)
-    {
-        //
+        $students = User::join('student_subjects' , 'student_subjects.student_id','=', 'students.id' )
+                    ->where('student_subjects.subject_id' ,$subject_id)
+                    ->get();
+        $subject = Subject::find($subject_id);
+
+        return view('back-pages/admin.courses', compact('teacher', 'students' ,'subject'));
     }
 }

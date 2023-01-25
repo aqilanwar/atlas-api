@@ -32,6 +32,57 @@
 											<!--begin::Menu-->
 											<ul class="menu menu-column menu-pill menu-title-gray-700 menu-bullet-gray-300 menu-state-bg menu-state-bullet-primary fw-bolder fs-5 mb-10">
 												<!--begin::Menu item-->
+
+												@if(Auth::guard('staff')->user()->is_admin == 0)
+													<li class="menu-item mb-1">
+														<!--begin::Menu link-->
+														<a class="menu-link px-6 py-4 {{ Route::is('staff.profile') ? 'active' : '' }}" href="{{ route('staff.profile')}}">
+															<span class="menu-bullet">
+																<span class="bullet"></span>
+															</span>
+															<span class="menu-title">Profile</span>
+														</a>
+														<!--end::Menu link-->
+													</li>
+													<!--end::Menu item-->
+													<!--begin::Menu item-->
+													<li class="menu-item mb-1">
+														<!--begin::Menu link-->
+														<a class="menu-link px-6 py-4 {{ Route::is('staff.courses' , 'staff.attendance' , 'staff.view.attendance' ) ? 'active' : '' }}" href="{{ route('staff.courses')}}">
+															<span class="menu-bullet">
+																<span class="bullet"></span>
+															</span>
+															<span class="menu-title">Courses</span>
+														</a>
+														<!--end::Menu link-->
+													</li>
+													<!--end::Menu item-->
+													<!--begin::Menu item-->
+													<li class="menu-item mb-1">
+														<!--begin::Menu link-->
+														<a class="menu-link px-6 py-4" href="">
+															<span class="menu-bullet">
+																<span class="bullet"></span>
+															</span>
+															<span class="menu-title">Timetable</span>
+														</a>
+														<!--end::Menu link-->
+													</li>
+													<!--end::Menu item-->
+													<!--begin::Menu item-->
+													<li class="menu-item mb-1">
+														<!--begin::Menu link-->
+														<a class="menu-link px-6 py-4" href="#">
+															<span class="menu-bullet">
+																<span class="bullet"></span>
+															</span>
+															<span class="menu-title">Payment</span>
+														</a>
+														<!--end::Menu link-->
+													</li>
+													<!--end::Menu item-->
+												@else
+
 												<li class="menu-item mb-1">
 													<!--begin::Menu link-->
 													<a class="menu-link px-6 py-4 {{ Route::is('staff.profile') ? 'active' : '' }}" href="{{ route('staff.profile')}}">
@@ -46,23 +97,11 @@
 												<!--begin::Menu item-->
 												<li class="menu-item mb-1">
 													<!--begin::Menu link-->
-													<a class="menu-link px-6 py-4 {{ Route::is('staff.courses' , 'staff.attendance' , 'staff.view.attendance' ) ? 'active' : '' }}" href="{{ route('staff.courses')}}">
+													<a class="menu-link px-6 py-4 {{ Route::is('admin.courses') ? 'active' : '' }}" href="{{ route('admin.courses')}}">
 														<span class="menu-bullet">
 															<span class="bullet"></span>
 														</span>
-														<span class="menu-title">Courses</span>
-													</a>
-													<!--end::Menu link-->
-												</li>
-												<!--end::Menu item-->
-												<!--begin::Menu item-->
-												<li class="menu-item mb-1">
-													<!--begin::Menu link-->
-													<a class="menu-link px-6 py-4" href="">
-														<span class="menu-bullet">
-															<span class="bullet"></span>
-														</span>
-														<span class="menu-title">Timetable</span>
+														<span class="menu-title">Manage Courses</span>
 													</a>
 													<!--end::Menu link-->
 												</li>
@@ -74,12 +113,26 @@
 														<span class="menu-bullet">
 															<span class="bullet"></span>
 														</span>
-														<span class="menu-title">Payment</span>
+														<span class="menu-title">Manage Teacher</span>
 													</a>
 													<!--end::Menu link-->
 												</li>
 												<!--end::Menu item-->
-		
+
+												<!--begin::Menu item-->
+												<li class="menu-item mb-1">
+													<!--begin::Menu link-->
+													<a class="menu-link px-6 py-4" href="#">
+														<span class="menu-bullet">
+															<span class="bullet"></span>
+														</span>
+														<span class="menu-title">Manage Payment</span>
+													</a>
+													<!--end::Menu link-->
+												</li>
+												<!--end::Menu item-->
+
+												@endif
 											</ul>
 											<!--end::Menu-->
 										</div>
