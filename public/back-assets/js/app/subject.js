@@ -1,4 +1,4 @@
-// window.onload = unselectCourses;
+window.onload = unselectCourses;
 
 function unselectCourses() {
     var list = document.querySelectorAll('input[type=checkbox]');

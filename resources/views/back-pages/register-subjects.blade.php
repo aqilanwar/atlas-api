@@ -108,3 +108,7 @@
 
 @endsection
 
+@section('javascript')
+<script src="{{asset('back-assets/js/app/subject.js')}}"></script>
+
+@endsection

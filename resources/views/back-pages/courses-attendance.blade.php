@@ -1,5 +1,5 @@
 @extends('back-layouts/master')
-@section('page', 'Courses')
+@section('page', 'Courses - Attendance')
 @section('content')
 
     <div class="flex-lg-row-fluid ms-lg-10 ">
@@ -32,6 +32,15 @@
             <!--end::Header-->
             <!--begin::Body-->
             <div class="card-body py-0">
+                
+                @if($attendances->isEmpty())
+                <div class="bg-grey">
+                    <div class="text-center mt-3 mb-9 container">
+                        <img src="{{ asset('back-assets/media/svg/empty.png') }}" style="width:40%" class="img-fluid">
+                        <h1 class="mt-3 text-primary">Currently empty :( </h1>
+                    </div>
+                </div>
+                @else
                 <!--begin::Table-->
                 <div class="table-responsive">
                     <table class="table align-middle table-row-bordered table-row-dashed gy-5 table-hover" id="kt_table_widget_1">
@@ -47,9 +56,9 @@
                             </tr>
                             <!--end::Table row-->
                             <!--begin::Table row-->
-                            @php
-                                $i=1;
-                            @endphp
+                            {{-- @if($attendances->isNull()) --}}
+
+                            {{-- @endif --}}
                             @foreach ($attendances as $key=>$attendance)                               
                             <tr>
                                 <!--begin::Author=-->
@@ -126,11 +135,14 @@
                         </tbody>
                         <!--end::Table body-->
                     </table>
+
                     <div class="card-footer">
                         {{ $attendances->links() }}
                     </div>
                 </div>
                 <!--end::Table-->
+
+                @endif
             </div>
             <!--end::Body-->
         </div>

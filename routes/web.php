@@ -44,6 +44,10 @@ Route::get('/update-attendance/{attendance_id}', [ProfileController::class, 'Sig
 Route::get('/timetable', [ProfileController::class, 'ShowTimetable'])->name('timetable');
 Route::get('/payment', [ProfileController::class, 'ShowPayment'])->name('payment');
 Route::post('/update-user', [ProfileController::class, 'UpdateProfile'])->name('update-profile');
+
+Route::get('/create-invoice', [BillController::class, 'CreateInvoice'])->name('create-invoice');
+
+
 Route::get('/register-courses', [SubjectController::class, 'FirstTimeRegister'])->name('register-courses');
 
 
@@ -56,9 +60,9 @@ Route::get('/logout', function () {
     return redirect('/login');
 });
 
+Route::get('/email_confirmation', [ProfileController::class, 'email_confirmation']);
 Route::middleware('auth')->group(function () {
     Route::post('/update-detail/save', [ProfileController::class, 'SaveUpdateDetail'])->name('update-detail.save');
-    Route::get('/email_confirmation', [ProfileController::class, 'email_confirmation']);
     Route::get('/profile', [ProfileController::class, 'ShowProfile'])->name('profile');
     Route::post('/redirect-payment-page', [SubjectController::class, 'RedirectPaymentPage'])->name('redirect-payment-page');
     Route::post('/submit-payment', [BillController::class, 'SubmitPayment'])->name('submit-payment');

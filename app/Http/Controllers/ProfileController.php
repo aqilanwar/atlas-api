@@ -210,19 +210,7 @@ class ProfileController extends Controller
 
     public function ShowTest($subject_id){
         $user_id = Auth::user()->id ;
-        
-        // //
-        // $attendances = Attendance::join('student_attendances', 'attendances.id', '=', 'student_attendances.attendance_id')
-        // ->where([
-        //     ['subject_id', $subject_id],
-        //     ['student_id', $user_id]
-        // ])
-        // ->select('attendances.title', 'attendances.start_date', 'attendances.end_date' , 'student_attendances.id as student_attendance_id' ,'student_attendances.updated_at as clocked_in')
-        // ->orderBy('student_attendances.created_at' , 'desc')
-        // ->paginate(5);
-        // $subject_id = Subject::find($subject_id);
-        //
-
+    
         $tests = Test::join('student_tests', 'tests.id' , '=' , 'student_tests.test_id')
         ->where([
             ['subject_id', $subject_id],
@@ -241,5 +229,9 @@ class ProfileController extends Controller
 
     public function ShowTimetable(){
         return view('back-pages/timetable');
+    }
+
+    public function ShowPayment(){
+        return view('back-pages/billing');
     }
 }
