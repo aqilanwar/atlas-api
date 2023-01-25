@@ -232,6 +232,12 @@ class ProfileController extends Controller
     }
 
     public function ShowPayment(){
-        return view('back-pages/billing');
+        $user_id = Auth::user()->id;
+
+        $data = Bill::where('student_id',$user_id)
+        ->orderBy('created_at' , 'desc')
+        ->paginate(5);
+        // dd(json_encode($data));
+        return view('back-pages/billing' , compact('data'));
     }
 }

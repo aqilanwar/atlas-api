@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Receipt - Atlas Edu</title>
+    <title>Invoice - Atlas Edu</title>
 </head>
 <style type="text/css">
     body{
@@ -87,12 +87,12 @@
 <body>
 <div class="head-title">
     <h1 class="text-center m-0 p-0">Receipt</h1>
-    <h3 class="text-center m-0 p-0">January 2023 Tuition Fee</h3>
+    <h3 class="text-center m-0 p-0">{{ $invoice->title }} Tuition Fee</h3>
 </div>
 <div class="add-detail mt-10">
     <div class="w-50 float-left mt-10">
-        <p class="m-0 pt-5 text-bold w-100">Receipt Id - <span class="gray-color">{{ $timestamp }}</span></p>
-        <p class="m-0 pt-5 text-bold w-100">Receipt Date - <span class="gray-color">{{ now()->toDateString()}}</span></p>
+        <p class="m-0 pt-5 text-bold w-100">Receipt Id - <span class="gray-color">{{ $invoice->receipt_id }}</span></p>
+        <p class="m-0 pt-5 text-bold w-100">Paid At - <span class="gray-color">{{ $invoice->paid_at}}</span></p>
     </div>
     <div class="float-right">
         <img src="http://103.253.145.174/assets/img/logo.png" width="300px">      

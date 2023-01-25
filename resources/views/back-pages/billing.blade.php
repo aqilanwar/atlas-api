@@ -1,5 +1,5 @@
 @extends('back-layouts/master')
-@section('page', 'Billing')
+@section('page', 'Payment')
 @section('content')
 
     <div class="flex-lg-row-fluid ms-lg-10 ">
@@ -23,24 +23,23 @@
             <div class="card-header border-0 pt-5 pb-3">
                 <!--begin::Card title-->
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="fw-bolder text-dark fs-2"> <a href="{{ route('courses') }}">Billing</a></span>
-                    <span class="text-gray-400 mt-2 fw-bold fs-6">List of bill</span>
+                    <span class="fw-bolder text-dark fs-2"> <a href="{{ route('courses') }}">Payment</a></span>
+                    <span class="text-gray-400 mt-2 fw-bold fs-6">List of tuition fee</span>
                 </h3>
                 <!--end::Card title-->
 
             </div>
             <!--end::Header-->
             <!--begin::Body-->
-
-            {{-- @if($tests->isEmpty()) --}}
-            <div class="bg-grey">
-                <div class="text-center mt-3 mb-9 container">
-                    <img src="{{ asset('back-assets/media/svg/empty.png') }}" style="width:40%" class="img-fluid">
-                    <h1 class="mt-3 text-primary">Currently empty :( </h1>
-                </div>
-            </div>
-            {{-- @else --}}
             <div class="card-body py-0">
+                @if($data->isEmpty())
+                <div class="bg-grey">
+                    <div class="text-center mt-3 mb-9 container">
+                        <img src="{{ asset('back-assets/media/svg/empty.png') }}" style="width:40%" class="img-fluid">
+                        <h1 class="mt-3 text-primary">Currently empty :( </h1>
+                    </div>
+                </div>
+                @else
                 <!--begin::Table-->
                 <div class="table-responsive">
                     <table class="table align-middle table-row-bordered table-row-dashed gy-5 table-hover" id="kt_table_widget_1">
@@ -57,7 +56,7 @@
                             <!--end::Table row-->
                             <!--begin::Table row-->
     
-                            {{-- @foreach ($tests as $key=>$test)                                --}}
+                            @foreach ($data as $key=>$bill)                               
                             <tr>
                                 <!--begin::Author=-->
                                 <td class="p-0">
@@ -65,8 +64,7 @@
                                         <div class="ps-3">
                                             <a 
                                                 class="text-gray-800 fw-boldest fs-5 text-hover-primary mb-1">
-                                                {{-- {{ $tests->firstItem() + $key }}. --}}
-                                                1
+                                                {{ $data->firstItem() + $key }}.
                                             </a>
                                             
                                         </div>
@@ -80,20 +78,19 @@
                                     <a 
                                         class="text-gray-800 fw-boldest fs-5 text-hover-primary mb-1">
                                         {{-- {{ $test->title }} --}}
-                                        Billing : January 2023
+                                        Billing : {{ $bill->title }}
                                     </a>
                                     <span class="text-gray-400 fw-bold d-block">
-                                        <a href="">Reference Id : 2023923992</a>
-                                        </span>
+                                        <a href="{{ asset('storage/pdf/invoice/' . $bill->invoice_id .'.pdf' ) }}">Invoice Id : {{ $bill->invoice_id }}</a>
+                                    </span>
                                 </div>
                             </td>
                             <td class="pe-2 min-w-70px">
                                 <div class="ps-3">
                                     <a 
                                         class="text-gray-800 fw-boldest fs-5 text-hover-primary mb-1">
-                                        {{ date('d F Y h:i a', strtotime(now())) }}
+                                        {{ date('d F Y h:i a', strtotime($bill->created_at)) }}
                                     </a>
-                                    {{-- <span class="text-gray-400 fw-bold d-block">Paid at : 2023923992</span> --}}
 
                                 </div>
                             </td>                                        
@@ -102,32 +99,32 @@
                                     <div class="ps-3">
                                         <a 
                                             class="text-gray-800 fw-boldest fs-5 text-hover-primary mb-1">
-                                            {{-- @if (is_null($test->marks)) --}}
+                                            @if (is_null($bill->receipt_id))
                                                 <span class="badge rounded-pill bg-danger fs-7 fw-boldest">
                                                     Not paid
                                                 </span>
-                                            {{-- @else --}}
-                                                {{-- <span class="badge rounded-pill bg-success fs-7 fw-boldest">
+                                            @else
+                                                <span class="badge rounded-pill bg-success fs-7 fw-boldest">
                                                     Paid
                                                 </span>
-                                                <span class="badge rounded-pill bg-warning fs-7 fw-boldest">
-                                                    Pending
-                                                </span> --}}
-                                            {{-- @endif --}}
+                                            @endif
                                         </a>
                                     </div>
                                 </td>       
-                                
-                                <td class="text-end pe-2 min-w-70px">
-                                    <div class="ps-3">
-                                        <a href="" class="btn btn-primary">Make payment</a>
-
-                                    </div>
-                                </td>       
-                                
-                                
-    
-                            {{-- @endforeach --}}
+                                @if (is_null($bill->receipt_id))
+                                    <td class="text-end pe-2 min-w-70px">
+                                        <div class="ps-3">
+                                            <a href="{{ route('make-payment' , $bill->invoice_id) }}" class="btn btn-primary">Make payment</a>
+                                        </div>
+                                    </td>       
+                                @else
+                                    <td class="text-end pe-2 min-w-70px">
+                                        <div class="ps-3">
+                                            <a href="{{ asset('storage/pdf/receipt/' . $bill->receipt_id .'.pdf' ) }}" class="btn btn-success">View Receipt</a>
+                                        </div>
+                                    </td>                                         
+                                @endif
+                            @endforeach
                             <!--end::Table row-->
                             
                             
@@ -135,9 +132,10 @@
                         <!--end::Table body-->
                     </table>
                     <div class="card-footer">
-                        {{-- {{ $tests->links() }} --}}
+                        {{ $data->links() }}
                     </div>
                 </div>
+                @endif
                 <!--end::Table-->
             </div>
 
@@ -148,3 +146,4 @@
 
     </div>
 @endsection
+

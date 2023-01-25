@@ -46,6 +46,9 @@ Route::get('/payment', [ProfileController::class, 'ShowPayment'])->name('payment
 Route::post('/update-user', [ProfileController::class, 'UpdateProfile'])->name('update-profile');
 
 Route::get('/create-invoice', [BillController::class, 'CreateInvoice'])->name('create-invoice');
+Route::get('/create-receipt', [BillController::class, 'CreateReceipt'])->name('create-receipt');
+Route::get('/make-payment/{invoice_id}', [BillController::class, 'MakePayment'])->name('make-payment');
+Route::post('/make-payment/{invoice_id}', [BillController::class, 'AttemptPayment'])->name('make-payment-post');
 
 
 Route::get('/register-courses', [SubjectController::class, 'FirstTimeRegister'])->name('register-courses');
@@ -69,15 +72,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
 
 
 //TEACHER ROUTE

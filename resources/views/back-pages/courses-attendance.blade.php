@@ -56,9 +56,6 @@
                             </tr>
                             <!--end::Table row-->
                             <!--begin::Table row-->
-                            {{-- @if($attendances->isNull()) --}}
-
-                            {{-- @endif --}}
                             @foreach ($attendances as $key=>$attendance)                               
                             <tr>
                                 <!--begin::Author=-->
