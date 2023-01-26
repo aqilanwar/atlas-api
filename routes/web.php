@@ -94,10 +94,21 @@ Route::group(['middleware'=>'staff'], function() {
     Route::post('/staff/test/create', [StaffController::class , 'CreateTest'])->name('create-test');
     Route::post('/staff/test/update', [StaffController::class , 'UpdateTest'])->name('update-test');
 
-    //admin route
+    //admin courses
     Route::get('/admin/courses', [StaffController::class , 'AdminCourse'])->name('admin.courses');
     Route::post('/admin/courses/create', [StaffController::class , 'AdminCreateCourse'])->name('admin.create.courses');
     Route::get('/admin/courses/show/{subject_id}', [StaffController::class , 'AdminViewCourse'])->name('admin.view.courses');
+    Route::post('/admin/courses/update', [StaffController::class , 'AdminUpdateCourse'])->name('admin.update.courses');
+    Route::post('/admin/courses/delete', [StaffController::class , 'AdminDeleteCourse'])->name('admin.delete.courses');
+
+    //admin teacher
+
+    Route::get('/admin/teacher', [StaffController::class , 'AdminTeacher'])->name('admin.teacher');
+    Route::post('/admin/courses/create', [StaffController::class , 'AdminCreateTeacher'])->name('admin.create.courses');
+    Route::post('/admin/courses/update', [StaffController::class , 'AdminUpdateCourse'])->name('admin.update.courses');
+    Route::post('/admin/courses/delete', [StaffController::class , 'AdminDeleteCourse'])->name('admin.delete.courses');
+    Route::get('/admin/courses/show/{subject_id}', [StaffController::class , 'AdminViewCourse'])->name('admin.view.courses');
+
 
 
 });

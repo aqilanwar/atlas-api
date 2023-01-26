@@ -216,17 +216,53 @@ class StaffController extends Controller
     // -delete course
     
     public function AdminViewCourse($subject_id){
-        $teacher = Subject::join('subject_teachers' , 'subject_teachers.subject_id' , '=' , 'subjects.id')
+        $teachers = Subject::join('subject_teachers' , 'subject_teachers.subject_id' , '=' , 'subjects.id')
         ->join('staff' , 'subject_teachers.teacher_id' , '=' , 'staff.id')
         ->where('subject_teachers.subject_id' ,'=' , $subject_id)
-        ->select('subjects.name as subject_name', 'staff.name', 'subjects.id')
-        ->get('subjects.name' , 'staff.name','subjects.id');
+        ->select('subjects.name as subject_name', 'staff.name', 'subjects.id', 'staff.email' ,'staff.phone_number')
+        ->get('subjects.name' , 'staff.name','subjects.id' ,'staff.email' ,'staff.phone_number' )
+        ->first(); 
 
+        // $teachers = $teachers->first();
+        // return $teachers;
         $students = User::join('student_subjects' , 'student_subjects.student_id','=', 'students.id' )
                     ->where('student_subjects.subject_id' ,$subject_id)
-                    ->get();
+                    ->paginate(5);
+        // return ($teachers);
         $subject = Subject::find($subject_id);
+        $data = Staff::where('is_admin', 0)->get();
 
-        return view('back-pages/admin.courses', compact('teacher', 'students' ,'subject'));
+        return view('back-pages/admin.courses-view', compact('teachers', 'students' ,'subject', 'data'));
+    }
+
+    public function AdminUpdateCourse(Request $request){
+        Subject::find($request->sub)
+        ->update([
+            'name' => $request->name,
+            'price'=> $request->price,
+            'time' => $request->time,
+            'day' => $request->day,
+            'updated_at' => now(),
+        ]);
+
+        $data = SubjectTeacher::where('subject_id', $request->sub)
+        ->update([
+            'teacher_id' => $request->teacher_id,
+            'subject_id' => $request->sub,
+        ]);
+        // return $data;
+        return back()->with('success', 'Course successfully updated !');
+
+    }
+
+    public function AdminDeleteCourse(Request $request){
+        //remove from subj
+        //reove from sub_te
+        //re from stu_sub
+        $subject_id = $request->sub;
+        Subject::where('id' , $subject_id)->delete();
+        student_subject::where('subject_id', $subject_id)->delete();
+        SubjectTeacher::where('subject_id' , $subject_id)->delete();
+        return redirect()->route('admin.courses')->with('success', 'Course succesfully deleted !');
     }
 }

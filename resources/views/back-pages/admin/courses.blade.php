@@ -22,7 +22,7 @@
         <!--begin::Header-->
         <div class="card-header align-items-center border-0 mt-5">
             <h3 class="card-title align-items-start flex-column">
-                <span class="fw-bolder text-dark fs-2"> <a href="{{ route('staff.courses') }}">Courses</a></span>
+                <span class="fw-bolder text-dark fs-2"> <a href="{{ route('admin.courses') }}">Courses</a></span>
                 <span class="text-gray-400 mt-2 fw-bold fs-6">List of all courses available </span>
             </h3>
             <div class="card-toolbar">
