@@ -15,7 +15,7 @@
             </h1>
             <br>
             <h5>
-              Please check your email to verify your account!
+              Please login to proceed with registration.
             </h5>
                 
             <div class="d-flex justify-content-center mx-4 mt-4 mb-3 mb-lg-4">

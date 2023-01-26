@@ -1,5 +1,5 @@
-@extends('back-layouts/master')
-@section('page', 'Courses')
+@extends('back-layouts-staff/master')
+@section('page', 'Timetable')
 @section('content')
 
     <div class="flex-lg-row-fluid ms-lg-10 ">
@@ -9,7 +9,7 @@
             <div class="card-header align-items-center border-0 mt-5">
                 <h3 class="card-title align-items-start flex-column">
                     <span class="fw-bolder text-dark fs-2"> <a href="{{ route('timetable') }}">Timetable</a></span>
-                    <span class="text-gray-400 mt-2 fw-bold fs-6">Plan your study </span>
+                    <span class="text-gray-400 mt-2 fw-bold fs-6">List of schedule for your courses that you teach </span>
                 </h3>
 
             </div>

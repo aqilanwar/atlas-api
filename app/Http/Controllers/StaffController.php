@@ -13,6 +13,7 @@ use App\Models\Test;
 use App\Models\Bill;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Auth\LoginRequest;
@@ -61,7 +62,15 @@ class StaffController extends Controller
         return view('back-pages/staff.courses', compact('data'));
 
     }
+    public function ShowTimetable(){
+        $user_id = Auth::guard('staff')->user()->id ;
 
+        $timetables = SubjectTeacher::join('subjects' , 'subjects.id' ,'=' , 'subject_teachers.subject_id')
+        ->where('subject_teachers.teacher_id' , $user_id)->get();
+
+        return view('back-pages/staff.timetable', compact('timetables'));
+    }
+    
     public function ShowAttendancePage($id)
     {   
         $data = Subject::find($id); 
@@ -320,8 +329,49 @@ class StaffController extends Controller
     public function AdminDeleteInvoice(Request $request){
         Bill::find($request->invoice_id)
         ->delete();
-
         return back()->with('success', 'Invoice has been deleted!');
     }
+
+    public function AdminStudent(){
+        $students = User::select('email' , 'name' , 'id')->paginate(10);
+        // return $students;
+        return view('back-pages/admin.student', compact('students'));
+    }
+
+    public function AdminDeleteStudent(Request $request){
+        $student_email = $request->student_email ;
+        $id = User::where('email' , $student_email )->first();
+        $student_id = $id->id;
+        // //Remove subject
+        $remove_subject = student_subject::where('student_id' , $student_id)->delete();
+
+        // //Remove attendance
+        $remove_attendance = StudentAttendance::where('student_id' , $student_id)->delete();
+
+        // //Remove test
+        $remove_test = StudentTest::where('student_id' , $student_id)->delete();
+
+        //remove user 
+        $users = DB::table('students')->delete($student_id);
+        return back()->with('success', 'Student has been deleted!');
+    }
+
+
+    public function UpdateProfile(Request $request){
+        $user_id = Auth::guard('staff')->user()->id ;
+
+        $user = Staff::find($user_id);
+        // dd($user);
+        $user->name = $request->name;
+        $user->dob= $request-> dob;
+        $user->phone_number = trim($request->phone_number , '_');
+        $user->address = $request->address;
+        // $user->updated_profile = 1; 
+        $user->updated_at = now(); 
+        $user->save();
+
+        return back()->with('success', 'Successfully updated your profile');
+
+    }   
 }
 

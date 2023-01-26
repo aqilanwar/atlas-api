@@ -36,6 +36,61 @@ class BillController extends Controller
         $student_is_registered->registered_course = 1;
         $student_is_registered->save();
 
+        //Create invoice and receipt
+        $date = Carbon::parse($request->date)->format('F Y');
+        $billing_date = $date;
+
+
+            $data = Subject::join('student_subjects' , 'student_subjects.subject_id', '=' ,'subjects.id')
+            ->where('student_subjects.student_id' ,'=' , $student_id)
+            ->select('subjects.name as subject_name', 'subjects.price')
+            ->get();
+    
+
+            $invoice_id = now()->timestamp;
+            $student_invoice = $invoice_id.'-'.$student_id;
+
+            $create_bill = Bill::insertGetId([
+                 'title' =>  $billing_date ,
+                 'date' => now(),
+                 'total' => $data->sum('price') ,
+                 'invoice_id' => $student_invoice,
+                 'receipt_id' => null,
+                 'status' => null,
+                 'paid_at' => null,
+                 'student_id' => $student_id,
+                 'created_at' => now(),
+            ]);
+            
+            $invoice = Bill::find($create_bill);
+            $student = User::find($student_id);
+
+            $pdf = PDF::loadView('invoice-pdf', compact('data' , 'student' ,'invoice'));
+    
+            $file = Storage::put('public/pdf/invoice/'.$student_invoice.'.pdf', $pdf->output());
+
+            //create receipt
+            $receipt_id = now()->timestamp;
+        
+            Bill::where('id', $create_bill)
+            ->update([
+                'paid_at' => now(),
+                'receipt_id' => $receipt_id,
+                'status' => 'Paid',
+                'updated_at' => now(),
+            ]);
+    
+            $student = User::find($student_id);
+            $data = Subject::join('student_subjects' , 'student_subjects.subject_id', '=' ,'subjects.id')
+            ->where('student_subjects.student_id' ,'=' , $student_id)
+            ->select('subjects.name as subject_name', 'subjects.price')
+            ->get();
+    
+            $invoice = Bill::where('invoice_id',$invoice_id)->first();
+    
+            $pdf = PDF::loadView('receipt-pdf', compact('data' , 'student' ,'invoice'));
+            $file = Storage::put('public/pdf/receipt/'.$receipt_id.'.pdf', $pdf->output());             
+
         return redirect()->route('profile')->with('message', 'You have successfully registered as Atlas Tuition Center student ! Thank you for choosing us.');
     }
 
@@ -85,12 +140,11 @@ class BillController extends Controller
         ->get();
 
         $timestamp = now()->timestamp;
-        dd(json_encode($timestamp));
-        $pdf = PDF::loadView('invoice-pdf', compact('data' , 'student' ,'timestamp'));
+        $pdf = PDF::loadView('receipt-pdf', compact('data' , 'student' ,'timestamp'));
 
-        $file = Storage::put('public/pdf/invoice/'.$timestamp.'.pdf', $pdf->output());
+        $file = Storage::put('public/pdf/receipt/'.$timestamp.'.pdf', $pdf->output());
 
-        return view('invoice-pdf' , compact('data' , 'student' , 'timestamp'));
+        return view('receipt-pdf' , compact('data' , 'student' , 'timestamp'));
     }
 
     public function MakePayment($invoice_id){

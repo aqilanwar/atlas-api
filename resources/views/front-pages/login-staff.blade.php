@@ -1,6 +1,6 @@
 @extends('front-layouts/master')
 
-@section('title' , 'Email Confirmation')
+@section('title' , 'Staff Login')
 @section('content')
  <!-- ======= Hero Section ======= -->
  <section id="hero" class="d-flex align-items-center">

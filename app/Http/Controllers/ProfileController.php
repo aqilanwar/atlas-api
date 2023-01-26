@@ -228,7 +228,14 @@ class ProfileController extends Controller
     }
 
     public function ShowTimetable(){
-        return view('back-pages/timetable');
+        $user_id = Auth::user()->id ;
+
+        $timetables = student_subject::join('subjects' , 'subjects.id' ,'=' , 'student_subjects.subject_id')
+        ->where('student_subjects.student_id' , $user_id)->get();
+
+        // return $timetables;
+
+        return view('back-pages/timetable', compact('timetables'));
     }
 
     public function ShowPayment(){

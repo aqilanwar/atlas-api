@@ -13,19 +13,24 @@
 											<div class="d-flex flex-center flex-column mb-10">
 												<!--begin::Avatar-->
 												<div class="symbol mb-3 symbol-100px symbol-circle">
-													<img alt="Pic" src="{{ asset('back-assets/media/avatars/150-26.jpg') }}" />
+													<img alt="Pic" src="{{ asset('back-assets/media/profile-pic/default.jpg') }}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Name-->
 												<a href="#" class="fs-2 text-gray-800 text-hover-primary fw-bolder mb-1">{{ Auth::guard('staff')->user()->name }}</a>
 												<!--end::Name-->
 												<!--begin::Position-->
-												<div class="fs-6 fw-bold text-gray-400 mb-2">Verified</div>
+												@if(Auth::guard('staff')->user()->is_admin == 0)
+												<div class="fs-6 fw-bold text-gray-400 mb-2">Teacher</div>
+												@else
+												<div class="fs-6 fw-bold text-gray-400 mb-2">Admin</div>
+
+												@endif
 												<!--end::Position-->
 												<!--begin::Actions-->
-												<div class="d-flex flex-center">
+												{{-- <div class="d-flex flex-center">
 													<a href="#" class="btn btn-sm btn-light-primary py-2 px-4 fw-bolder me-2" data-kt-drawer-show="true" data-kt-drawer-target="#kt_drawer_chat">Update profile picture</a>
-												</div>
+												</div> --}}
 												<!--end::Actions-->
 											</div>
 											<!--end::Summary-->
@@ -48,7 +53,7 @@
 													<!--begin::Menu item-->
 													<li class="menu-item mb-1">
 														<!--begin::Menu link-->
-														<a class="menu-link px-6 py-4 {{ Route::is('staff.courses' , 'staff.attendance' , 'staff.view.attendance' ) ? 'active' : '' }}" href="{{ route('staff.courses')}}">
+														<a class="menu-link px-6 py-4 {{ Route::is('staff.courses' , 'staff.attendance' , 'staff.view.attendance' ,'staff.test' , 'staff.view.test' ) ? 'active' : '' }}" href="{{ route('staff.courses')}}">
 															<span class="menu-bullet">
 																<span class="bullet"></span>
 															</span>
@@ -60,23 +65,11 @@
 													<!--begin::Menu item-->
 													<li class="menu-item mb-1">
 														<!--begin::Menu link-->
-														<a class="menu-link px-6 py-4" href="">
+														<a class="menu-link px-6 py-4 {{ Route::is('staff.timetable') ? 'active' : '' }}" href="{{ route('staff.timetable')}}">
 															<span class="menu-bullet">
 																<span class="bullet"></span>
 															</span>
 															<span class="menu-title">Timetable</span>
-														</a>
-														<!--end::Menu link-->
-													</li>
-													<!--end::Menu item-->
-													<!--begin::Menu item-->
-													<li class="menu-item mb-1">
-														<!--begin::Menu link-->
-														<a class="menu-link px-6 py-4" href="#">
-															<span class="menu-bullet">
-																<span class="bullet"></span>
-															</span>
-															<span class="menu-title">Payment</span>
 														</a>
 														<!--end::Menu link-->
 													</li>
@@ -97,7 +90,7 @@
 												<!--begin::Menu item-->
 												<li class="menu-item mb-1">
 													<!--begin::Menu link-->
-													<a class="menu-link px-6 py-4 {{ Route::is('admin.courses') ? 'active' : '' }}" href="{{ route('admin.courses')}}">
+													<a class="menu-link px-6 py-4 {{ Route::is('admin.courses' , 'admin.view.courses') ? 'active' : '' }}" href="{{ route('admin.courses')}}">
 														<span class="menu-bullet">
 															<span class="bullet"></span>
 														</span>
@@ -122,11 +115,24 @@
 												<!--begin::Menu item-->
 												<li class="menu-item mb-1">
 													<!--begin::Menu link-->
-													<a class="menu-link px-6 py-4 {{ Route::is('admin.payment') ? 'active' : '' }}" href="{{ route('admin.payment')}}">
+													<a class="menu-link px-6 py-4 {{ Route::is('admin.payment' ,'admin.payment.title') ? 'active' : '' }}" href="{{ route('admin.payment')}}">
 														<span class="menu-bullet">
 															<span class="bullet"></span>
 														</span>
 														<span class="menu-title">Manage Payment</span>
+													</a>
+													<!--end::Menu link-->
+												</li>
+												<!--end::Menu item-->
+
+												<!--begin::Menu item-->
+												<li class="menu-item mb-1">
+													<!--begin::Menu link-->
+													<a class="menu-link px-6 py-4 {{ Route::is('admin.student') ? 'active' : '' }}" href="{{ route('admin.student')}}">
+														<span class="menu-bullet">
+															<span class="bullet"></span>
+														</span>
+														<span class="menu-title">Manage Student</span>
 													</a>
 													<!--end::Menu link-->
 												</li>

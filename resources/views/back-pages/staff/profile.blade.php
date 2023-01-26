@@ -3,6 +3,11 @@
 @section('content')
     <!--begin::Content-->
     <div class="flex-lg-row-fluid ms-lg-10">
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
         <!--begin::details View-->
         <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
             <!--begin::Card header-->
@@ -78,7 +83,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-dark">{{  Auth::guard('staff')->user()->name }}</span>
+                        <span class="fw-bolder fs-6 text-dark">{{  Auth::guard('staff')->user()->address }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -119,7 +124,7 @@
 					<!--begin::Modal header-->
 					<!--begin::Modal body-->
 					<div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
-                        <form action="{{ route('update-profile') }}" method="POST">
+                        <form action="{{ route('staff.update.profile') }}" method="POST">
                             @csrf
                             <!--begin::Heading-->
                             <div class="text-center mb-13">
@@ -134,25 +139,20 @@
                             <label for="form-control">Full Name : </label>
                             <input class="form-control form-control-solid mb-8" name="name" value="{{ Auth::guard('staff')->user()->name  }}" placeholder="Enter your full name">
                             <!--end::Input fills-->
-    
-                            {{-- <!--start::Input fills-->
-                            <label for="form-control">Email: </label>
-                            <input class="form-control form-control-solid mb-8" name="email" value="{{ Auth::user()->email  }}" placeholder="Type or paste emails here">
-                            <!--end::Input fills-->
-     --}}
+
                             <!--start::Input fills-->
                             <label for="form-control">Phone number : </label>
-                            <input class="form-control form-control-solid mb-8" name="phone_number" value="{{ Auth::guard('staff')->user()->phone_number  }}" placeholder="Type or paste emails here">
+                            <input class="form-control form-control-solid mb-8" name="phone_number" value="{{ Auth::guard('staff')->user()->phone_number  }}" placeholder="Enter your phone number">
                             <!--end::Input fills-->
     
                             <!--start::Input fills-->
                             <label for="form-control">Date of birth : </label>
-                            <input class="form-control form-control-solid mb-8" type="date" name="dob" value="{{ Auth::guard('staff')->user()->dob  }}" placeholder="Type or paste emails here">
+                            <input class="form-control form-control-solid mb-8" type="date" name="dob" value="{{ Auth::guard('staff')->user()->dob  }}" placeholder="Enter date of birth">
                             <!--end::Input fills-->
     
                             <!--start::Input fills-->
                             <label for="form-control">Address: </label>
-                            <input class="form-control form-control-solid mb-8" name="address" value="{{ Auth::guard('staff')->user()->address  }}"placeholder="Type or paste emails here">
+                            <input class="form-control form-control-solid mb-8" name="address" value="{{ Auth::guard('staff')->user()->address  }}"placeholder="Enter your address">
                             <!--end::Input fills-->
     
     

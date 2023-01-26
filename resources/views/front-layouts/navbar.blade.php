@@ -10,12 +10,12 @@
 
       <nav id="navbar" class="navbar">
         <ul>
+          @if(Route::is('login' , 'register' , 'staff.login'   ))
+              
+          @else
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Courses</a></li>
-          <li><a class="nav-link scrollto" href="#team">Teacher</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-
+          <li><a class="nav-link scrollto" href="#services">Subjects</a></li>
+          @endif
           @if(Auth::user())
             <li class="dropdown"><a href="#"><span>User</span> <i class="bi bi-chevron-down"></i></a>
               <ul>

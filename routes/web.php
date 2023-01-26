@@ -82,6 +82,8 @@ Route::get('/logout/staff', [StaffLoginController::class ,'logout'])->name('staf
 Route::group(['middleware'=>'staff'], function() {
     Route::get('/staff/profile', [StaffController::class , 'index'])->name('staff.profile');
     Route::get('/staff/courses', [StaffController::class , 'ShowCourses'])->name('staff.courses');
+    Route::get('/staff/timetable', [StaffController::class , 'ShowTimetable'])->name('staff.timetable');
+    Route::post('/staff/profile/update', [StaffController::class , 'UpdateProfile'])->name('staff.update.profile');
     
     //Attendance
     Route::get('/staff/attendance/show/{id}', [StaffController::class , 'ShowAttendancePage'])->name('staff.attendance');
@@ -107,6 +109,11 @@ Route::group(['middleware'=>'staff'], function() {
     Route::post('/admin/teacher/create', [StaffController::class , 'AdminCreateTeacher'])->name('admin.create.teacher');
     Route::post('/admin/teacher/delete', [StaffController::class , 'AdminDeleteTeacher'])->name('admin.delete.teacher');
 
+    //admin student
+    Route::get('/admin/student', [StaffController::class , 'AdminStudent'])->name('admin.student');
+    Route::post('/admin/student/delete', [StaffController::class , 'AdminDeleteStudent'])->name('admin.delete.student');
+
+    //admin billing
     Route::get('/admin/payment/', [StaffController::class , 'AdminPayment'])->name('admin.payment');
     Route::post('/admin/payment/delete', [StaffController::class , 'AdminDeleteInvoice'])->name('admin.delete.invoice');
     Route::get('/admin/payment/bill/all', [StaffController::class , 'AdminPaymentAll'])->name('admin.payment.all');
