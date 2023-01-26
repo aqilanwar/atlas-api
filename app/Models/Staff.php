@@ -14,6 +14,7 @@ class Staff extends Authenticatable
     protected $fillable = [
         'name',
         'email' ,
+        'password',
         'phone_number',
         'dob',
         'address',

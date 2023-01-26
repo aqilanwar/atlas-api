@@ -132,7 +132,6 @@ class BillController extends Controller
 
         $invoice = Bill::where('invoice_id',$invoice_id)->first();
 
-        // dd(json_encode($receipt_id));
         $pdf = PDF::loadView('receipt-pdf', compact('data' , 'student' ,'invoice'));
         $file = Storage::put('public/pdf/receipt/'.$receipt_id.'.pdf', $pdf->output());
         return redirect()->route('payment')->with('success', 'Invoice ID : '.$invoice_id .' have successfully paid !');

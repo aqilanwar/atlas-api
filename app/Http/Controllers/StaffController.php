@@ -11,6 +11,7 @@ use App\Models\StudentTest;
 use App\Models\student_subject;
 use App\Models\Test;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Auth\LoginRequest;
@@ -256,13 +257,34 @@ class StaffController extends Controller
     }
 
     public function AdminDeleteCourse(Request $request){
-        //remove from subj
-        //reove from sub_te
-        //re from stu_sub
         $subject_id = $request->sub;
         Subject::where('id' , $subject_id)->delete();
         student_subject::where('subject_id', $subject_id)->delete();
         SubjectTeacher::where('subject_id' , $subject_id)->delete();
         return redirect()->route('admin.courses')->with('success', 'Course succesfully deleted !');
+    }
+
+    public function AdminTeacher(){
+        $teachers = Staff::where('is_admin', 0)
+        ->orderBy('created_at' , 'desc')
+        ->paginate(5);
+
+        $subjects = Subject::all();
+        return view('back-pages/admin.teacher', compact('teachers' , 'subjects'));
+    }
+
+    public function AdminCreateTeacher(Request $request){
+        $data = Staff::insert([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'dob' => $request->dob,
+            'address' => $request->address,
+            'password' => Hash::make('password'),
+            'created_at' => now(),
+        ]);
+        // dd($data);
+        // return redirect('staff.profile');
+        return back()->with('success', 'Teacher has been added successfully!');
     }
 }
