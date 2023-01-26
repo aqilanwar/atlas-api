@@ -109,7 +109,7 @@
 												<!--begin::Menu item-->
 												<li class="menu-item mb-1">
 													<!--begin::Menu link-->
-													<a class="menu-link px-6 py-4" href="#">
+													<a class="menu-link px-6 py-4 {{ Route::is('admin.teacher') ? 'active' : '' }}" href="{{ route('admin.teacher')}}">
 														<span class="menu-bullet">
 															<span class="bullet"></span>
 														</span>
@@ -122,7 +122,7 @@
 												<!--begin::Menu item-->
 												<li class="menu-item mb-1">
 													<!--begin::Menu link-->
-													<a class="menu-link px-6 py-4" href="#">
+													<a class="menu-link px-6 py-4 {{ Route::is('admin.payment') ? 'active' : '' }}" href="{{ route('admin.payment')}}">
 														<span class="menu-bullet">
 															<span class="bullet"></span>
 														</span>

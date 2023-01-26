@@ -44,9 +44,9 @@ Route::get('/update-attendance/{attendance_id}', [ProfileController::class, 'Sig
 Route::get('/timetable', [ProfileController::class, 'ShowTimetable'])->name('timetable');
 Route::get('/payment', [ProfileController::class, 'ShowPayment'])->name('payment');
 Route::post('/update-user', [ProfileController::class, 'UpdateProfile'])->name('update-profile');
-
-Route::get('/create-invoice', [BillController::class, 'CreateInvoice'])->name('create-invoice');
 Route::get('/create-receipt', [BillController::class, 'CreateReceipt'])->name('create-receipt');
+
+
 Route::get('/make-payment/{invoice_id}', [BillController::class, 'MakePayment'])->name('make-payment');
 Route::post('/make-payment/{invoice_id}', [BillController::class, 'AttemptPayment'])->name('make-payment-post');
 
@@ -106,6 +106,15 @@ Route::group(['middleware'=>'staff'], function() {
     Route::get('/admin/teacher', [StaffController::class , 'AdminTeacher'])->name('admin.teacher');
     Route::post('/admin/teacher/create', [StaffController::class , 'AdminCreateTeacher'])->name('admin.create.teacher');
     Route::post('/admin/teacher/delete', [StaffController::class , 'AdminDeleteTeacher'])->name('admin.delete.teacher');
+
+    Route::get('/admin/payment/', [StaffController::class , 'AdminPayment'])->name('admin.payment');
+    Route::post('/admin/payment/delete', [StaffController::class , 'AdminDeleteInvoice'])->name('admin.delete.invoice');
+    Route::get('/admin/payment/bill/all', [StaffController::class , 'AdminPaymentAll'])->name('admin.payment.all');
+    Route::get('/admin/payment/bill/show/{bill_title}', [StaffController::class , 'AdminPaymentTitle'])->name('admin.payment.title');
+
+    Route::post('/create-invoice', [BillController::class, 'CreateInvoice'])->name('create-invoice');
+    // Route::post('/admin/payment/create', [StaffController::class , 'AdminCreatePayment'])->name('admin.create.teacher');
+    // Route::post('/admin/payment/delete', [StaffController::class , 'AdminDeletePayment'])->name('admin.delete.teacher');
     // Route::post('/admin/courses/create', [StaffController::class , 'AdminCreateTeacher'])->name('admin.create.teacher');
     // // Route::post('/admin/courses/update', [StaffController::class , 'AdminUpdateTeacher'])->name('admin.update.teacher');
     // Route::post('/admin/courses/delete', [StaffController::class , 'AdminDeleteTeacher'])->name('admin.delete.teacher');

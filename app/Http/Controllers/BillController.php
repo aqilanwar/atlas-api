@@ -39,47 +39,45 @@ class BillController extends Controller
         return redirect()->route('profile')->with('message', 'You have successfully registered as Atlas Tuition Center student ! Thank you for choosing us.');
     }
 
-    public function CreateInvoice(){
-        
-        $student_id = 1; 
-        $student = User::find($student_id);
-        $data = Subject::join('student_subjects' , 'student_subjects.subject_id', '=' ,'subjects.id')
-        ->where('student_subjects.student_id' ,'=' , $student_id)
-        ->select('subjects.name as subject_name', 'subjects.price')
-        ->get();
+    public function CreateInvoice(Request $request){
+        $created_at = $request->date;
+        $date = Carbon::parse($request->date)->format('F Y');
+        $billing_date = $date;
 
-        $now = Carbon::now()->addMonth();
-        $billing_date = $now->format('F Y');
-        
-        $invoice_id = now()->addMonth()->timestamp;
-        // dd(json_encode($data->sum('price') ));
-        $create_bill = Bill::insertGetId([
-             'title' =>  $billing_date ,
-             'date' => $now,
-             'total' => $data->sum('price') ,
-             'invoice_id' => $invoice_id,
-             'receipt_id' => null,
-             'status' => null,
-             'paid_at' => null,
-             'student_id' => $student_id,
-             'created_at' => now(),
-        ]);
+        $students = User::all(); 
+        foreach($students as $student){
+            $data = Subject::join('student_subjects' , 'student_subjects.subject_id', '=' ,'subjects.id')
+            ->where('student_subjects.student_id' ,'=' , $student->id)
+            ->select('subjects.name as subject_name', 'subjects.price')
+            ->get();
+    
+            
+            $invoice_id = now()->timestamp;
+            $student_invoice = $invoice_id.'-'.$student->id;
 
-        $invoice = Bill::find($create_bill);
-        // dd(json_encode($invoice));
-
-        $pdf = PDF::loadView('invoice-pdf', compact('data' , 'student' ,'invoice'));
-
-        $file = Storage::put('public/pdf/invoice/'.$invoice_id.'.pdf', $pdf->output());
-        // return Storage::url($file);
-        // return $pdf->download('test.pdf');
-        
-        return view('invoice-pdf' , compact('data' , 'student' , 'invoice'));
+            $create_bill = Bill::insertGetId([
+                 'title' =>  $billing_date ,
+                 'date' => $created_at,
+                 'total' => $data->sum('price') ,
+                 'invoice_id' => $student_invoice,
+                 'receipt_id' => null,
+                 'status' => null,
+                 'paid_at' => null,
+                 'student_id' => $student->id,
+                 'created_at' => now(),
+            ]);
+    
+            $invoice = Bill::find($create_bill);
+    
+            $pdf = PDF::loadView('invoice-pdf', compact('data' , 'student' ,'invoice'));
+    
+            $file = Storage::put('public/pdf/invoice/'.$student_invoice.'.pdf', $pdf->output());
+        }        
+        return redirect()->route('admin.payment')->with('success', 'Invoice '.$billing_date.' succesfully created.');
     }
 
     public function CreateReceipt(){
-        
-        $student_id = 1; 
+        $student_id = Auth::user()->id; 
         $student = User::find($student_id);
         $data = Subject::join('student_subjects' , 'student_subjects.subject_id', '=' ,'subjects.id')
         ->where('student_subjects.student_id' ,'=' , $student_id)

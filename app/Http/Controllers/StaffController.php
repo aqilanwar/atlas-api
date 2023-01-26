@@ -10,6 +10,7 @@ use App\Models\StudentAttendance;
 use App\Models\StudentTest;
 use App\Models\student_subject;
 use App\Models\Test;
+use App\Models\Bill;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -287,4 +288,40 @@ class StaffController extends Controller
         // return redirect('staff.profile');
         return back()->with('success', 'Teacher has been added successfully!');
     }
+
+    public function AdminDeleteTeacher(Request $request){
+        //
+    }
+
+    public function AdminPayment(){
+        $bills = Bill::distinct()->pluck('title');
+        // return $bills;
+        return view('back-pages/admin.payment-list' , compact('bills'));
+    }
+    // public function AdminPayment(){
+    //     $bills = Bill::join('students' , 'students.id' , '=' , 'bills.student_id')
+    //     // ->where('bills.title' , 'January 2023')
+    //     ->select('students.name as student_name', 'students.email', 'bills.id' ,'bills.invoice_id' ,'bills.receipt_id' ,'bills.title')
+    //     ->paginate(10);
+    //     // return $titles;
+    //     return view('back-pages/admin.payment' , compact('bills'));
+    // }
+    public function AdminPaymentTitle($bill_title){
+        // $bill_title = 'February 2023';
+        // $titles = Bill::distinct()->pluck('title');
+        $bills = Bill::join('students' , 'students.id' , '=' , 'bills.student_id')
+        ->where('bills.title' , $bill_title)
+        ->select('students.name as student_name', 'students.email', 'bills.id' ,'bills.invoice_id' ,'bills.receipt_id' ,'bills.title' ,'bills.created_at' ,'bills.id')
+        ->paginate(10);
+        // return $bills;
+        return view('back-pages/admin.payment' , compact('bills' , 'bill_title'));
+    }
+
+    public function AdminDeleteInvoice(Request $request){
+        Bill::find($request->invoice_id)
+        ->delete();
+
+        return back()->with('success', 'Invoice has been deleted!');
+    }
 }
+
