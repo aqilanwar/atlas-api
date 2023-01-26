@@ -57,14 +57,20 @@ License: For each use you must have a valid license purchased only from above li
 					</div>
 					<!--end::Container-->
 					@include('back-layouts/footer')
-
 				</div>
 				<!--end::Wrapper-->
 			</div>
 			<!--end::Page-->
 		</div>
 		<!--end::Root-->
+		<!--begin::Drawers-->
 
+
+		<!--begin::Modals-->
+		@yield('update-profile')
+
+
+		<!--end::Modals-->
 		<!--begin::Scrolltop-->
 		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
 			<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->

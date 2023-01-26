@@ -13,20 +13,17 @@
 											<div class="d-flex flex-center flex-column mb-10">
 												<!--begin::Avatar-->
 												<div class="symbol mb-3 symbol-100px symbol-circle">
-													<img alt="Pic" src="assets/media/avatars/150-26.jpg" />
+													<img alt="Pic" src="{{ asset('back-assets/media/profile-pic/default.jpg')  }}" />
 												</div>
 												<!--end::Avatar-->
 												<!--begin::Name-->
 												<a href="#" class="fs-2 text-gray-800 text-hover-primary fw-bolder mb-1">{{ Auth::user()->name }}</a>
 												<!--end::Name-->
 												<!--begin::Position-->
-												<div class="fs-6 fw-bold text-gray-400 mb-2">Verified</div>
+
+												<div class="fs-6 fw-bold text-gray-400 mb-2">Student</div>
 												<!--end::Position-->
-												<!--begin::Actions-->
-												<div class="d-flex flex-center">
-													<a href="#" class="btn btn-sm btn-light-primary py-2 px-4 fw-bolder me-2" data-kt-drawer-show="true" data-kt-drawer-target="#kt_drawer_chat">Update profile picture</a>
-												</div>
-												<!--end::Actions-->
+							
 											</div>
 											<!--end::Summary-->
 											<!--begin::Menu-->
