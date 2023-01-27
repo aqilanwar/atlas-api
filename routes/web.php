@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\StaffController;
+use App\Models\Subject;
 use App\Http\Controllers\Auth\StaffLoginController;
 
 // use App\Http\Controllers\StaffController;
@@ -21,7 +22,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('front-pages/home');
+    $subjects = Subject::all();
+    // return $subjects;
+    return view('front-pages/home' , compact('subjects'));
 });
 
 Route::get('/log', function () {
