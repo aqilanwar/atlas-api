@@ -335,7 +335,7 @@ class StaffController extends Controller
     }
 
     public function AdminStudent(){
-        $students = User::select('email' , 'name' , 'id')->paginate(10);
+        $students = User::select('email' , 'name' , 'id' ,'created_at')->paginate(10);
         // return $students;
         return view('back-pages/admin.student', compact('students'));
     }
