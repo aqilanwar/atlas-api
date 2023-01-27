@@ -105,6 +105,8 @@ Route::group(['middleware'=>'staff'], function() {
     Route::get('/admin/courses/show/{subject_id}', [StaffController::class , 'AdminViewCourse'])->name('admin.view.courses');
     Route::post('/admin/courses/update', [StaffController::class , 'AdminUpdateCourse'])->name('admin.update.courses');
     Route::post('/admin/courses/delete', [StaffController::class , 'AdminDeleteCourse'])->name('admin.delete.courses');
+    Route::post('/admin/courses/addstudent', [StaffController::class , 'AdminAddStudent'])->name('admin.add.student');
+    Route::post('/admin/courses/deletecoursestudent', [StaffController::class , 'AdminDeleteStudentCourse'])->name('admin.course.delete.student');
 
     //admin teacher
 

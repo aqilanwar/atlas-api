@@ -241,9 +241,11 @@ class StaffController extends Controller
                     ->paginate(5);
         // return ($teachers);
         $subject = Subject::find($subject_id);
+
+        $allstudents = User::all();
         $data = Staff::where('is_admin', 0)->get();
 
-        return view('back-pages/admin.courses-view', compact('teachers', 'students' ,'subject', 'data'));
+        return view('back-pages/admin.courses-view', compact('teachers', 'students' ,'subject', 'data' , 'allstudents'));
     }
 
     public function AdminUpdateCourse(Request $request){
@@ -371,6 +373,27 @@ class StaffController extends Controller
         $user->save();
 
         return back()->with('success', 'Successfully updated your profile');
+
+    }   
+
+    public function AdminAddStudent(Request $request){
+
+        student_subject::insert([
+            'student_id' => $request->student_id,
+            'subject_id' => $request->sub ,
+        ]);
+        
+        return back()->with('success', 'Successfully added student');
+
+    }   
+
+    public function AdminDeleteStudentCourse(Request $request){
+        // $subject_id = $request->subject_id;
+
+        $student_id = $request->student_id;
+        // return $student_id;
+        $id = student_subject::find($student_id)->delete();
+        return back()->with('success', 'Successfully added student');
 
     }   
 }

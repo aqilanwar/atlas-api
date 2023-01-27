@@ -42,8 +42,11 @@
                     <a href="#" class="btn btn-danger align-self-center m-3" data-bs-toggle="modal"
                         data-bs-target="#delete_course">Delete Course</a>
                     <!--begin::Menu-->
-                    <a href="#" class="btn btn-primary align-self-center" data-bs-toggle="modal"
+                    <a href="#" class="btn btn-primary align-self-center m-3" data-bs-toggle="modal"
                         data-bs-target="#kt_modal_edit_profile">Update Course</a>
+                    <!--end::Menu-->
+                    <a href="#" class="btn btn-primary align-self-center m-3" data-bs-toggle="modal"
+                        data-bs-target="#add_student">Add Student</a>
                     <!--end::Menu-->
                 </div>
                 <!--end::Action-->
@@ -133,7 +136,14 @@
                                         </a>                                  
                                     </div>
                                 </td>
-                            </tr>
+                                <td>
+                                    <div class="ps-3">
+                                    <!--begin::Menu-->
+                                    <a href="#" class="btn btn-danger align-self-center" data-bs-toggle="modal"
+                                    data-bs-target="#delete-student-{{ $student->id }}">Remove student</a>
+                                <!--end::Menu-->                              
+                                    </div>
+                                </td>
                             @endforeach
                             <!--begin::Table row-->
                             <!--end::Table row-->
@@ -155,6 +165,127 @@
 @endsection
 
 @section('update-profile')
+		<!--begin::Modal - Edit Profile-->
+        @foreach ($students as $student)            
+		<div class="modal fade" id="delete-student-{{ $student->id }}" tabindex="-1" aria-hidden="true">
+			<!--begin::Modal dialog-->
+			<div class="modal-dialog mw-650px">
+				<!--begin::Modal content-->
+				<div class="modal-content">
+					<!--begin::Modal header-->
+					<div class="modal-header pb-0 border-0 justify-content-end">
+						<!--begin::Close-->
+						<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+							<!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+							<span class="svg-icon svg-icon-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+									<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+								</svg>
+							</span>
+							<!--end::Svg Icon-->
+						</div>
+						<!--end::Close-->
+					</div>
+					<!--begin::Modal header-->
+					<!--begin::Modal body-->
+					<div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
+                        <form action="{{ route('admin.course.delete.student') }}" method="POST">
+                            @csrf
+                            <!--begin::Heading-->
+                            <div class="text-center mb-13">
+                                <!--begin::Title-->
+                                <h1 class="mb-3">Delete student</h1>
+                                <input type="hidden" name="student_id" value="{{ $student->id }}">
+                                <!--end::Title-->
+                            </div>
+                            <h2 class="text-center">Name : {{ $student->name }}</h2>
+                            <h2 class="text-center">Email : {{ $student->email }}</h2>
+                            <h2 class="text-center text-danger mt-4">Are you sure to delete this student from this course?</h2>
+                            {{-- <h5 class="text-center text-danger">This will remove every student in this course and teacher.</h5> --}}
+                            <!--begin::Wrapper-->
+                            <br>
+                            <br>
+
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-lg btn-light-danger">Delete this student</button>
+                            </div>
+                            <div class="float-end">
+                            </div>
+                            <!--end::Wrapper-->
+                        </form>
+						
+					</div>
+					<!--end::Modal body-->
+				</div>
+				<!--end::Modal content-->
+			</div>
+			<!--end::Modal dialog-->
+		</div>
+        @endforeach
+		<!--end::Modal - Edit Profile-->
+		<!--begin::Modal - Edit Profile-->
+		<div class="modal fade" id="add_student" tabindex="-1" aria-hidden="true">
+			<!--begin::Modal dialog-->
+			<div class="modal-dialog mw-650px">
+				<!--begin::Modal content-->
+				<div class="modal-content">
+						<!--begin::Modal header-->
+                        <div class="modal-header pb-0 border-0 justify-content-end">
+                            <!--begin::Close-->
+                            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                <span class="svg-icon svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </div>
+                            <!--end::Close-->
+                        </div>
+                        <!--begin::Modal header-->
+					<!--begin::Modal body-->
+					<div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
+                        <form action="{{ route('admin.add.student') }}" method="POST">
+                            @csrf
+                            <!--begin::Heading-->
+                            <div class="text-center mb-13">
+                                <!--begin::Title-->
+                                <h1 class="mb-3">Add student</h1>
+                                <!--end::Title-->
+                            </div>
+                            <!--end::Heading-->
+                            <div class="separator d-flex flex-center mb-8">
+                            </div>                            
+                            <!--start::Input fills-->
+                            <label for="form-control">Select Student : </label>
+                            <input type="hidden" name="sub" value="{{ $subject->id }}">
+                            <select name="student_id" class="form-select form-control-solid mb-8" required>
+                                <option value="">Select Student</option>
+                                @foreach($allstudents as $s)
+                                    <option value="{{ $s->id }}">{{ $s->name}} - {{ $s->email }}</option>
+                                @endforeach
+                            </select>                            
+                            <!--end::Input fills-->
+    
+                            
+                            <!--begin::Wrapper-->
+                            <div class="float-end">
+                                <button type="submit" class="btn btn-lg btn-light-primary">Save</button>
+                            </div>
+                            <!--end::Wrapper-->
+                        </form>
+						
+					</div>
+					<!--end::Modal body-->
+				</div>
+				<!--end::Modal content-->
+			</div>
+			<!--end::Modal dialog-->
+		</div>
+		<!--end::Modal - Edit Profile-->
 		<!--begin::Modal - Edit Profile-->
 		<div class="modal fade" id="kt_modal_edit_profile" tabindex="-1" aria-hidden="true">
 			<!--begin::Modal dialog-->
@@ -311,4 +442,5 @@
 			<!--end::Modal dialog-->
 		</div>
 		<!--end::Modal - Edit Profile-->
+        
 @endsection
