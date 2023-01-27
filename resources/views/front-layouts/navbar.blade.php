@@ -17,7 +17,7 @@
           <li><a class="nav-link scrollto" href="#services">Subjects</a></li>
           @endif
           @if(Auth::user())
-            <li class="dropdown"><a href="#"><span>User</span> <i class="bi bi-chevron-down"></i></a>
+            <li class="dropdown"><a href="#"><span>{{ Profile }}</span> <i class="bi bi-chevron-down"></i></a>
               <ul>
                 <li><a href="{{ route('profile')}}">Profile</a></li>
                 <li><a href="{{ route('logout')}}">Logout</a></li>
@@ -36,7 +36,7 @@
               </ul>
             </li>
             @else
-            <li><a class="getstarted scrollto" href="{{route('staff.login')}}">Login as admin</a></li>
+            <li><a class="getstarted scrollto" href="{{route('staff.login')}}">Login as staff</a></li>
           @endif
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
